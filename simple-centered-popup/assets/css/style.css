@@ -1,0 +1,247 @@
+/**
+ * Simple Centered Popup Styles
+ *
+ * @package Simple_Centered_Popup
+ */
+
+/* Overlay styles */
+.scp-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, var(--scp-overlay-opacity, 0.7));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--scp-animation-duration, 0.3s) ease,
+                visibility var(--scp-animation-duration, 0.3s) ease;
+}
+
+.scp-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Popup container */
+.scp-popup {
+    position: relative;
+    max-width: var(--scp-max-width, 600px);
+    width: 90%;
+    background-color: var(--scp-button-color, #ffffff);
+    border-radius: var(--scp-border-radius, 8px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    margin: 20px;
+    transform: scale(0.9);
+    transition: transform var(--scp-animation-duration, 0.3s) ease;
+    max-height: 90vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.scp-overlay.active .scp-popup {
+    transform: scale(1);
+}
+
+/* Close button */
+.scp-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.scp-close-btn:hover,
+.scp-close-btn:focus {
+    color: #000;
+    outline: none;
+}
+
+.scp-close-btn:focus {
+    outline: 2px solid var(--scp-button-color, #0073aa);
+    outline-offset: 2px;
+}
+
+/* Popup title */
+.scp-popup-title {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.3;
+    padding-right: 30px;
+}
+
+/* Popup image */
+.scp-popup-image {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.scp-popup-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: calc(var(--scp-border-radius, 8px) - 2px);
+}
+
+/* Popup video */
+.scp-popup-video {
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.scp-popup-video iframe,
+.scp-popup-video video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Popup content */
+.scp-popup-content {
+    margin-bottom: 20px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.scp-popup-content p {
+    margin: 0 0 15px 0;
+}
+
+.scp-popup-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Popup footer */
+.scp-popup-footer {
+    text-align: center;
+    margin-top: 25px;
+}
+
+/* Button */
+.scp-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--scp-button-color, #0073aa);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: calc(var(--scp-border-radius, 8px) - 2px);
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.scp-button:hover,
+.scp-button:focus {
+    background-color: #005a87;
+    transform: translateY(-2px);
+    outline: none;
+}
+
+.scp-button:focus {
+    outline: 2px solid var(--scp-button-color, #0073aa);
+    outline-offset: 2px;
+}
+
+/* Animation: Fade */
+.scp-animation-fade .scp-popup {
+    transform: translateY(-20px);
+}
+
+.scp-overlay.active.scp-animation-fade .scp-popup {
+    transform: translateY(0);
+}
+
+/* Animation: Scale */
+.scp-animation-scale .scp-popup {
+    transform: scale(0.8);
+}
+
+.scp-overlay.active.scp-animation-scale .scp-popup {
+    transform: scale(1);
+}
+
+/* Animation: Slide */
+.scp-animation-slide .scp-popup {
+    transform: translateY(50px);
+}
+
+.scp-overlay.active.scp-animation-slide .scp-popup {
+    transform: translateY(0);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .scp-popup {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .scp-popup-title {
+        font-size: 20px;
+    }
+
+    .scp-close-btn {
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scp-popup {
+        width: 98%;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .scp-popup-title {
+        font-size: 18px;
+    }
+
+    .scp-button {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 100%;
+    }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .scp-overlay,
+    .scp-popup,
+    .scp-close-btn,
+    .scp-button {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Print styles - hide popup when printing */
+@media print {
+    .scp-overlay {
+        display: none !important;
+    }
+}
