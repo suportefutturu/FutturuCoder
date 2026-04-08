@@ -1,6 +1,914 @@
-# Examples and documentation
-EXEMPLOS_PRATICOS.md
+```php
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+*.class
+*.exe
+*.dll
+*.so
+*.a
+*.out
+dist/
+build/
+target/
 
-futturu-micro-commitment/
-!futturu-micro-commitment/futturu-micro-commitment.php
-!futturu-micro-commitment/EXEMPLOS_PRATICOS.md
+# Dependencies
+node_modules/
+venv/
+.venv/
+.env
+.env.local
+.env.*
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+*.~
+*.py.swp
+*.save
+
+# Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+nbproject/
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+.CFUserTextEncoding
+*.DS_Store*
+._*
+
+# Python specific
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+.coverage
+htmlcov/
+.coverage.*
+.mypy_cache/
+.pytest_cache/
+.tox/
+.hypothesis/
+
+# Node.js specific
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+jspm_packages/
+*.tsbuildinfo
+.nyc_output/
+
+# Java specific
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+# Go specific
+*.o
+*.a
+*.swp
+*~
+.DS_Store
+*.so
+*.dylib
+*.dll
+
+# C/C++ specific
+*.o
+*.a
+*.dylib
+*.dll
+*.exe
+*.out
+*.obj
+*.ilk
+*.pdb
+*.gch
+*.gcda
+*.gcno
+
+# Ruby specific
+*.gem
+*.rbc
+*.sass-cache
+capybara-*.html
+.rspec
+.sock
+.bundle
+.rbenv-vars
+.travis.yml
+*.gemspec
+Gemfile.lock
+
+# Compression
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
+
+# Coverage reports
+coverage/
+*.lcov
+*.profraw
+*.profdata
+
+# Testing
+*.log
+test/
+tests/
+spec/
+
+# Documentation
+docs/_build/
+*.rst~
+
+# Environment specific
+.env
+.env.local
+.env.*
+!.env.example
+
+# Backup files
+*~
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+
+# IDE specific
+.settings/
+.project
+.classpath
+.c9/
+*.launch
+.metadata
+bin/
+tmp/
+*.tmp
+*.temp
+
+# VCS
+.git/
+.svn/
+.hg/
+.cvs
+.rcs
+.scc
+
+# Build systems
+.gradle/
+build/
+target/
+dist/
+out/
+release/
+*.iws
+*.ipr
+*.iml
+nbproject/
+
+# Database
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Fonts
+*.ttf
+*.woff
+*.woff2
+*.eot
+*.svg
+
+# Images (do not ignore - these should be versioned)
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+# *.bmp
+# *.webp
+# *.tiff
+# *.ico
+
+# Videos
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+
+# Audio
+*.mp3
+*.wav
+*.ogg
+*.flac
+*.aac
+
+# Large files
+*.psd
+*.ai
+*.indd
+*.sketch
+*.fig
+*.xd
+*.xcf
+*.blend
+*.max
+*.ma
+*.mb
+*.fbx
+*.obj
+*.dae
+*.3ds
+*.blend1
+*.blend2
+*.blend3
+
+# Configuration
+config/
+configs/
+configuration/
+
+# Cache
+.cache/
+.caches/
+*.cache
+*.cached
+
+# Lock files
+package-lock.json
+composer.lock
+Gemfile.lock
+Pipfile.lock
+yarn.lock
+Cargo.lock
+go.sum
+*.lock
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*~
+
+# Sensitive files
+secrets/
+.secret
+.credentials
+.key
+.pem
+.ppk
+.ssh/
+id_rsa
+id_dsa
+*.key
+*.pem
+*.p12
+*.pfx
+*.p7b
+*.p7c
+*.spc
+*.crt
+*.cer
+*.der
+*.csr
+*.ovpn
+*.ovick
+*.ovpn.ovick
+
+# Local development
+local/
+dev/
+development/
+debug/
+debug.log
+
+# CI/CD
+.circleci/
+.github/
+.travis.yml
+appveyor.yml
+.codeclimate.yml
+.jenkins
+.drone.yml
+.semaphore
+.shippable.yml
+.wercker
+.codeship
+.teamcity
+
+# Mobile
+*.ipa
+*.apk
+*.aab
+*.xap
+*.sis
+*.sisx
+*.n-gage
+*.3gpp
+*.3gp
+*.amv
+
+# Docker
+.dockerenv
+.dockerinit
+Dockerfile*
+docker-compose*
+*.dockerignore
+
+# Kubernetes
+*.k8s
+*.kube
+.kube/
+helm/
+charts/
+
+# Serverless
+.serverless/
+serverless-state.json
+.sls/
+sls/
+
+# Frontend
+public/
+assets/
+static/
+vendor/
+bower_components/
+jspm_packages/
+web_modules/
+node_modules/
+
+# Backend
+logs/
+log/
+runtime/
+storage/
+sessions/
+cache/
+uploads/
+files/
+data/
+database/
+
+# Framework specific
+# Laravel
+vendor/
+bootstrap/cache/
+storage/logs/
+storage/framework/
+public/storage/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Symfony
+var/
+app/cache/
+app/logs/
+web/bundles/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Django
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+.coverage
+htmlcov/
+.coverage.*
+.tox/
+.pytest_cache/
+.venv/
+venv/
+env/
+ENV/
+pip-log.txt
+pip-delete-this-directory.txt
+.pydevproject
+.project
+.idea/
+*.log
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Rails
+*.gem
+*.rbc
+*.sass-cache
+capybara-*.html
+.rspec
+.sock
+.bundle
+.rbenv-vars
+.travis.yml
+*.gemspec
+Gemfile.lock
+.rake
+db/schema.rb
+db/structure.sql
+coverage/
+*.dSYM
+*.dSYM/*
+.rubocop.yml
+.config/reek.yml
+.env
+.env.local
+.env.*
+!.env.example
+
+# Express
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.env.local
+.env.*
+!.env.example
+
+# Angular
+node_modules/
+dist/
+tmp/
+coverage/
+.angular/
+.angular-cli.json
+.angular-config.json
+.angular-cache
+.angular-cli/
+.angular/
+.angular.json
+.angular.json~
+.angular-cli.json~
+.angular-config.json~
+
+# React
+node_modules/
+build/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.env.local
+.env.*
+!.env.example
+.DS_Store
+*.log
+.env.test
+.env.production
+.env.development
+
+# Vue
+node_modules/
+dist/
+public/dist/
+coverage/
+.nuxt/
+.vuepress/dist
+output/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Next.js
+.next/
+out/
+node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Nuxt.js
+.nuxt/
+dist/
+node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Gatsby
+.cache/
+public/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Expo
+.expo/
+.expo-shared/
+node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Flutter
+.dart_tool/
+.ios/
+android/
+build/
+ios/
+lib/
+test/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Unity
+Library/
+Temp/
+Obj/
+Build/
+Logs/
+UserSettings/
+*.cs.meta
+*.prefab.meta
+*.unity.meta
+*.asset.meta
+*.mat.meta
+*.anim.meta
+*.controller.meta
+*.physicsMaterial.meta
+*.prefab.meta
+*.unity.meta
+*.asset.meta
+*.mat.meta
+*.anim.meta
+*.controller.meta
+*.physicsMaterial.meta
+*.prefab.meta
+*.unity.meta
+*.asset.meta
+*.mat.meta
+*.anim.meta
+*.controller.meta
+*.physicsMaterial.meta
+*.meta
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+*.userprefs.meta
+*.sln.meta
+*.csproj.meta
+*.unityproj.meta
+*.mat.meta
+*.anim.meta
+*.controller.meta
+*.physicsMaterial.meta
+*.prefab.meta
+*.unity.meta
+*.asset.meta
+*.mat.meta
+*.anim.meta
+*.controller.meta
+*.physicsMaterial.meta
+*.prefab.meta
+*.unity.meta
+*.asset.meta
+*.mat.meta
+*.anim.meta
+*.controller.meta
+*.physicsMaterial.meta
+.env
+.env.local
+.env.*
+!.env.example
+
+# Unreal Engine
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+Config/
+Plugins/
+*.uproject
+*.uplugin
+.env
+.env.local
+.env.*
+!.env.example
+
+# Godot
+.import/
+.export/
+.escn.import
+.scn.import
+.gdimport
+.env
+.env.local
+.env.*
+!.env.example
+
+# Electron
+node_modules/
+dist/
+release/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Cordova
+platforms/
+plugins/
+hooks/
+config.xml
+.env
+.env.local
+.env.*
+!.env.example
+
+# Ionic
+node_modules/
+platforms/
+plugins/
+www/
+.env
+.env.local
+.env.*
+!.env.example
+
+# PhoneGap
+platforms/
+plugins/
+www/
+config.xml
+.env
+.env.local
+.env.*
+!.env.example
+
+# NativeScript
+node_modules/
+platforms/
+hooks/
+app/package-lock.json
+.env
+.env.local
+.env.*
+!.env.example
+
+# Tauri
+src-tauri/target/
+src-tauri/node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Capacitor
+node_modules/
+android/
+ios/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Quasar
+node_modules/
+dist/
+.quasar/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Svelte
+node_modules/
+public/build/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Astro
+node_modules/
+dist/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Remix
+node_modules/
+public/build/
+.env
+.env.local
+.env.*
+!.env.example
+
+# RedwoodJS
+node_modules/
+api/dist/
+web/dist/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Blitz
+node_modules/
+.build/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Keystone
+node_modules/
+keystone/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Strapi
+node_modules/
+build/
+public/uploads/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Directus
+node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Payload CMS
+node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Ghost
+content/images/
+core/server/public/
+.env
+.env.local
+.env.*
+!.env.example
+
+# WordPress
+wp-content/cache/
+wp-content/uploads/
+wp-content/upgrade/
+*.sql
+.env
+.env.local
+.env.*
+!.env.example
+
+# Drupal
+sites/default/files/
+private/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Joomla
+images/
+media/
+tmp/
+logs/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Magento
+var/
+generated/
+pub/static/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Shopify
+node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+
+# WooCommerce
+wp-content/uploads/
+.env
+.env.local
+.env.*
+!.env.example
+
+# PrestaShop
+img/tmp/
+cache/
+log/
+.env
+.env.local
+.env.*
+!.env.example
+
+# OpenCart
+image/cache/
+system/storage/
+.env
+.env.local
+.env.*
+!.env.example
+
+# BigCommerce
+node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Shopify
+node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Magento
+var/
+generated/
+pub/static/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Custom PHP applications
+*.php~
+*.php.bak
+*.php.save
+.env
+.env.local
+.env.*
+!.env.example
+```
