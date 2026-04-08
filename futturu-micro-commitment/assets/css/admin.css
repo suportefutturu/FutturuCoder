@@ -1,0 +1,240 @@
+/**
+ * Admin Styles for Futturu Micro-Commitment Plugin
+ */
+
+.fmc-admin-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid #e5e7eb;
+    margin-bottom: 20px;
+}
+
+.fmc-tab-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    transition: all 0.2s ease;
+}
+
+.fmc-tab-btn:hover {
+    color: #3b82f6;
+    background: #f9fafb;
+}
+
+.fmc-tab-btn.active {
+    color: #3b82f6;
+    border-bottom-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.fmc-tab-content {
+    display: none;
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+}
+
+.fmc-tab-content.active {
+    display: block;
+}
+
+/* Question Items */
+.fmc-question-item,
+.fmc-cta-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.fmc-question-header,
+.fmc-cta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.fmc-question-title,
+.fmc-cta-title {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 15px;
+}
+
+.fmc-question-body,
+.fmc-cta-body {
+    padding: 20px;
+}
+
+.fmc-question-body label,
+.fmc-cta-body label {
+    display: block;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.fmc-question-id,
+.fmc-question-text,
+.fmc-answer-text,
+.fmc-answer-next,
+.fmc-cta-id,
+.fmc-cta-title-input,
+.fmc-cta-description,
+.fmc-cta-button-text,
+.fmc-cta-link,
+.fmc-cta-type {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: border-color 0.2s ease;
+}
+
+.fmc-question-id:focus,
+.fmc-question-text:focus,
+.fmc-answer-text:focus,
+.fmc-answer-next:focus,
+.fmc-cta-id:focus,
+.fmc-cta-title-input:focus,
+.fmc-cta-description:focus,
+.fmc-cta-button-text:focus,
+.fmc-cta-link:focus,
+.fmc-cta-type:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.fmc-question-id[readonly] {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+textarea.fmc-cta-description {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Answer Items */
+.fmc-answers-container {
+    margin-bottom: 15px;
+}
+
+.fmc-answer-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.fmc-answer-item .fmc-answer-text {
+    flex: 2;
+    min-width: 200px;
+    margin-bottom: 0;
+}
+
+.fmc-answer-item .fmc-answer-next {
+    flex: 2;
+    min-width: 200px;
+    margin-bottom: 0;
+}
+
+.fmc-add-answer,
+.fmc-remove-answer,
+.fmc-remove-question,
+.fmc-remove-cta {
+    white-space: nowrap;
+}
+
+.fmc-add-answer {
+    margin-top: 10px;
+}
+
+/* Buttons */
+#fmc-add-question,
+#fmc-add-cta,
+#fmc-save-questions,
+#fmc-save-ctas,
+#fmc-refresh-responses {
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+/* Responses Table */
+#fmc-responses-table {
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+#fmc-responses-body td {
+    color: #6b7280;
+}
+
+/* Settings Form */
+.form-table th scope="row" {
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-table td .description {
+    color: #6b7280;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* Ensure tab content is visible */
+.fmc-tab-content.active {
+    display: block !important;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .fmc-admin-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .fmc-tab-btn {
+        flex: 1 1 50%;
+        text-align: center;
+    }
+    
+    .fmc-answer-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .fmc-answer-item .fmc-answer-text,
+    .fmc-answer-item .fmc-answer-next {
+        width: 100%;
+    }
+}
+
+/* Notice Styling */
+.notice.fmc-notice {
+    border-left-width: 4px;
+    padding: 12px;
+}
+
+.notice.fmc-notice-success {
+    border-left-color: #10b981;
+}
+
+.notice.fmc-notice-error {
+    border-left-color: #ef4444;
+}
