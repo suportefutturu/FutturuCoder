@@ -1,0 +1,231 @@
+/**
+ * Frontend Styles for Futturu Micro-Commitment Plugin
+ * Clean, modern design without gamification elements
+ */
+
+.fmc-widget {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.fmc-container {
+    padding: 30px;
+}
+
+/* Progress Bar */
+.fmc-progress-bar {
+    height: 4px;
+    background: #e8ecf1;
+    border-radius: 2px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.fmc-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+    width: 0%;
+    transition: width 0.4s ease;
+    border-radius: 2px;
+}
+
+/* Question Section */
+.fmc-question-wrapper {
+    animation: fmcFadeIn 0.4s ease;
+}
+
+@keyframes fmcFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fmc-question-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.fmc-answers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.fmc-answer-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 15px;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.fmc-answer-btn:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+    transform: translateX(4px);
+}
+
+.fmc-answer-btn:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* CTA Section */
+.fmc-cta-wrapper {
+    animation: fmcFadeIn 0.5s ease;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.fmc-cta-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.fmc-cta-description {
+    font-size: 16px;
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.fmc-cta-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.fmc-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    color: #ffffff;
+}
+
+.fmc-cta-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Footer */
+.fmc-footer {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.fmc-powered-by {
+    font-size: 13px;
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+/* Loading State */
+.fmc-loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7280;
+}
+
+.fmc-spinner {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: fmcSpin 0.8s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes fmcSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error State */
+.fmc-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .fmc-container {
+        padding: 20px;
+    }
+    
+    .fmc-question-text {
+        font-size: 18px;
+    }
+    
+    .fmc-answer-btn {
+        padding: 14px 16px;
+        font-size: 14px;
+    }
+    
+    .fmc-cta-title {
+        font-size: 20px;
+    }
+    
+    .fmc-cta-button {
+        width: 100%;
+        padding: 14px 24px;
+    }
+}
+
+/* Accessibility */
+.fmc-widget *:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .fmc-progress-fill,
+    .fmc-answer-btn,
+    .fmc-cta-button,
+    .fmc-question-wrapper,
+    .fmc-cta-wrapper {
+        transition: none;
+        animation: none;
+    }
+}
