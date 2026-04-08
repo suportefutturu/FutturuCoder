@@ -68,143 +68,367 @@ class Futturu_Micro_Commitment {
     }
     
     public function activate() {
-        // Create default options
+        // Create default options with practical examples
         $default_questions = array(
+            // Pergunta 1: Objetivo principal
             array(
-                'id' => 'q1',
+                'id' => 'q1_objetivo',
                 'question' => 'Qual o principal objetivo do seu website hoje?',
                 'answers' => array(
                     array(
-                        'text' => 'Gerar mais vendas',
-                        'next' => 'q2_sales'
+                        'text' => 'Gerar mais vendas online',
+                        'next' => 'q2_vendas'
                     ),
                     array(
                         'text' => 'Aumentar a visibilidade da marca',
                         'next' => 'q2_branding'
                     ),
                     array(
-                        'text' => 'Captação de Leads',
+                        'text' => 'Captar leads qualificados',
                         'next' => 'q2_leads'
                     ),
                     array(
-                        'text' => 'Não tenho um site ainda',
-                        'cta' => 'cta_no_website'
+                        'text' => 'Melhorar o atendimento ao cliente',
+                        'next' => 'q2_atendimento'
                     ),
                     array(
-                        'text' => 'Outro',
-                        'next' => 'q2_other'
+                        'text' => 'Não tenho um site ainda',
+                        'cta' => 'cta_sem_site'
+                    ),
+                    array(
+                        'text' => 'Outro objetivo',
+                        'next' => 'q2_outro'
                     )
                 )
             ),
+            // Ramo: Vendas
             array(
-                'id' => 'q2_sales',
-                'question' => 'Seu site atual converte bem?',
+                'id' => 'q2_vendas',
+                'question' => 'Seu site atual converte bem os visitantes em clientes?',
                 'answers' => array(
                     array(
-                        'text' => 'Sim',
-                        'cta' => 'cta_optimization'
+                        'text' => 'Sim, mas quero melhorar ainda mais',
+                        'cta' => 'cta_otimizacao_vendas'
                     ),
                     array(
-                        'text' => 'Não',
-                        'cta' => 'cta_conversion'
+                        'text' => 'Não, a conversão está baixa',
+                        'cta' => 'cta_auditoria_conversao'
+                    ),
+                    array(
+                        'text' => 'Não tenho site ou é muito antigo',
+                        'cta' => 'cta_site_novo_vendas'
                     )
                 )
             ),
+            // Ramo: Branding
             array(
                 'id' => 'q2_branding',
-                'question' => 'Você já possui identidade visual definida?',
+                'question' => 'Você já possui identidade visual definida (logo, cores, tipografia)?',
                 'answers' => array(
                     array(
-                        'text' => 'Sim',
-                        'cta' => 'cta_branding_existing'
+                        'text' => 'Sim, está tudo definido',
+                        'next' => 'q3_branding_existente'
                     ),
                     array(
-                        'text' => 'Não',
-                        'cta' => 'cta_branding_new'
+                        'text' => 'Parcialmente, mas precisa de ajustes',
+                        'cta' => 'cta_refresh_branding'
+                    ),
+                    array(
+                        'text' => 'Não, preciso criar do zero',
+                        'cta' => 'cta_branding_completo'
                     )
                 )
             ),
+            array(
+                'id' => 'q3_branding_existente',
+                'question' => 'Sua marca está presente de forma consistente em todos os canais digitais?',
+                'answers' => array(
+                    array(
+                        'text' => 'Sim, mas quero fortalecer ainda mais',
+                        'cta' => 'cta_posicionamento_digital'
+                    ),
+                    array(
+                        'text' => 'Não, está inconsistente',
+                        'cta' => 'cta_unificacao_marca'
+                    )
+                )
+            ),
+            // Ramo: Leads
             array(
                 'id' => 'q2_leads',
-                'question' => 'Qual tipo de lead você busca?',
+                'question' => 'Qual tipo de lead você busca captar?',
                 'answers' => array(
                     array(
-                        'text' => 'B2B (Empresas)',
-                        'cta' => 'cta_b2b_leads'
+                        'text' => 'Empresas (B2B)',
+                        'next' => 'q3_leads_b2b'
                     ),
                     array(
-                        'text' => 'B2C (Consumidores)',
-                        'cta' => 'cta_b2c_leads'
+                        'text' => 'Consumidores finais (B2C)',
+                        'next' => 'q3_leads_b2c'
+                    ),
+                    array(
+                        'text' => 'Ambos',
+                        'cta' => 'cta_estrategia_mista'
                     )
                 )
             ),
             array(
-                'id' => 'q2_other',
-                'question' => 'Conte-nos mais sobre seu projeto',
+                'id' => 'q3_leads_b2b',
+                'question' => 'Qual o ticket médio dos seus clientes B2B?',
                 'answers' => array(
                     array(
-                        'text' => 'Falar com especialista',
-                        'cta' => 'cta_specialist'
+                        'text' => 'Até R$ 5.000',
+                        'cta' => 'cta_leads_b2b_pequeno'
+                    ),
+                    array(
+                        'text' => 'De R$ 5.000 a R$ 50.000',
+                        'cta' => 'cta_leads_b2b_medio'
+                    ),
+                    array(
+                        'text' => 'Acima de R$ 50.000',
+                        'cta' => 'cta_leads_b2b_enterprise'
+                    )
+                )
+            ),
+            array(
+                'id' => 'q3_leads_b2c',
+                'question' => 'Como você atrai consumidores atualmente?',
+                'answers' => array(
+                    array(
+                        'text' => 'Tráfego pago (Google/Facebook Ads)',
+                        'cta' => 'cta_otimizacao_trafego'
+                    ),
+                    array(
+                        'text' => 'Orgânico (SEO/Redes Sociais)',
+                        'cta' => 'cta_aceleracao_organico'
+                    ),
+                    array(
+                        'text' => 'Indicação/Boca a boca',
+                        'cta' => 'cta_escalagem_indicacao'
+                    ),
+                    array(
+                        'text' => 'Não estou atraindo leads',
+                        'cta' => 'cta_estrategia_do_zero'
+                    )
+                )
+            ),
+            // Ramo: Atendimento
+            array(
+                'id' => 'q2_atendimento',
+                'question' => 'Qual canal de atendimento você quer priorizar no site?',
+                'answers' => array(
+                    array(
+                        'text' => 'WhatsApp/Chat',
+                        'cta' => 'cta_integracao_whatsapp'
+                    ),
+                    array(
+                        'text' => 'Formulários de contato',
+                        'cta' => 'cta_formularios_inteligentes'
+                    ),
+                    array(
+                        'text' => 'FAQ automático/Chatbot',
+                        'cta' => 'cta_chatbot_inteligente'
+                    ),
+                    array(
+                        'text' => 'Todos integrados',
+                        'cta' => 'cta_omnichannel'
+                    )
+                )
+            ),
+            // Ramo: Outro
+            array(
+                'id' => 'q2_outro',
+                'question' => 'Conte-nos mais sobre seu projeto ou necessidade específica:',
+                'answers' => array(
+                    array(
+                        'text' => 'Quero falar com um especialista agora',
+                        'cta' => 'cta_especialista'
+                    ),
+                    array(
+                        'text' => 'Preciso de um orçamento personalizado',
+                        'cta' => 'cta_orcamento'
+                    ),
+                    array(
+                        'text' => 'Quero ver casos de sucesso primeiro',
+                        'cta' => 'cta_cases_sucesso'
                     )
                 )
             )
         );
         
         $default_ctas = array(
-            'cta_no_website' => array(
-                'title' => 'Comece com um website profissional',
-                'description' => 'Desenvolvemos websites institucionais e de alta performance para PMEs.',
+            // CTAs para quem não tem site
+            'cta_sem_site' => array(
+                'title' => 'Comece com um website profissional de alta performance',
+                'description' => 'Desenvolvemos websites institucionais e de e-commerce focados em resultados para PMEs. Do planejamento à entrega, cuidamos de tudo.',
                 'button_text' => 'Solicite um orçamento gratuito',
-                'link' => '#contato',
+                'link' => '/contato#orcamento-site',
                 'type' => 'link'
             ),
-            'cta_conversion' => array(
-                'title' => 'Aumente suas conversões',
-                'description' => 'Descubra como otimizar seu site para converter mais visitantes em clientes.',
-                'button_text' => 'Solicite sua auditoria de performance gratuita',
-                'link' => '#auditoria',
+            'cta_site_novo_vendas' => array(
+                'title' => 'Crie um site focado em conversão desde o primeiro dia',
+                'description' => 'Desenvolvemos websites otimizados para vendas, com UX estratégica e integração completa com suas ferramentas de negócio.',
+                'button_text' => 'Quero um site que vende',
+                'link' => '/solucoes/websites-vendas',
                 'type' => 'link'
             ),
-            'cta_optimization' => array(
-                'title' => 'Leve suas vendas ao próximo nível',
-                'description' => 'Mesmo sites que convertem bem podem melhorar. Veja quanto pode crescer.',
+            
+            // CTAs para otimização de vendas
+            'cta_otimizacao_vendas' => array(
+                'title' => 'Leve suas vendas online ao próximo nível',
+                'description' => 'Mesmo sites que convertem bem podem melhorar. Nossa consultoria identifica oportunidades ocultas de crescimento.',
                 'button_text' => 'Agende uma consultoria estratégica',
-                'link' => '#consultoria',
+                'link' => '/consultoria/conversao',
                 'type' => 'link'
             ),
-            'cta_branding_existing' => array(
-                'title' => 'Fortaleça sua presença digital',
-                'description' => 'Com sua identidade definida, podemos criar experiências digitais impactantes.',
-                'button_text' => 'Fale com nosso time de design',
-                'link' => '#design',
+            'cta_auditoria_conversao' => array(
+                'title' => 'Descubra por que seu site não converte',
+                'description' => 'Receba uma auditoria completa de UX, performance e jornada do cliente. Identificamos os gargalos e propomos soluções práticas.',
+                'button_text' => 'Solicite sua auditoria gratuita',
+                'link' => '/auditoria-gratuita',
                 'type' => 'link'
             ),
-            'cta_branding_new' => array(
-                'title' => 'Construa uma marca memorável',
-                'description' => 'Criamos identidades visuais completas que transmitem o valor do seu negócio.',
-                'button_text' => 'Conheça nossos pacotes de branding',
-                'link' => '#branding',
+            
+            // CTAs para branding
+            'cta_refresh_branding' => array(
+                'title' => 'Atualize sua identidade visual para a era digital',
+                'description' => 'Modernizamos sua marca mantendo a essência. Criamos sistemas visuais flexíveis para todos os canais digitais.',
+                'button_text' => 'Conheça nosso processo de refresh',
+                'link' => '/servicos/refresh-branding',
                 'type' => 'link'
             ),
-            'cta_b2b_leads' => array(
-                'title' => 'Gere leads qualificados B2B',
-                'description' => 'Estratégias específicas para atrair e converter empresas.',
-                'button_text' => 'Veja casos de sucesso B2B',
-                'link' => '#cases-b2b',
+            'cta_branding_completo' => array(
+                'title' => 'Construa uma marca memorável do zero',
+                'description' => 'Criamos identidades visuais completas que transmitem o valor do seu negócio e conectam emocionalmente com seu público.',
+                'button_text' => 'Veja nossos pacotes de branding',
+                'link' => '/servicos/branding-completo',
                 'type' => 'link'
             ),
-            'cta_b2c_leads' => array(
-                'title' => 'Escale sua captação B2C',
-                'description' => 'Soluções comprovadas para gerar volume e qualidade em leads de consumo.',
-                'button_text' => 'Descubra nossa metodologia',
-                'link' => '#metodologia',
+            'cta_posicionamento_digital' => array(
+                'title' => 'Fortaleça o posicionamento da sua marca online',
+                'description' => 'Estratégias de conteúdo, SEO e presença digital para tornar sua marca referência no segmento.',
+                'button_text' => 'Fale com nosso time de estratégia',
+                'link' => '/estrategia/posicionamento',
                 'type' => 'link'
             ),
-            'cta_specialist' => array(
-                'title' => 'Fale com um especialista',
-                'description' => 'Nossos consultores estão prontos para entender sua necessidade específica.',
-                'button_text' => 'Agende uma conversa',
-                'link' => '#contato',
+            'cta_unificacao_marca' => array(
+                'title' => 'Unifique sua marca em todos os canais',
+                'description' => 'Criamos guidelines completos e implementamos consistência visual em website, redes sociais e materiais corporativos.',
+                'button_text' => 'Quero unificar minha marca',
+                'link' => '/servicos/unificacao-marca',
+                'type' => 'link'
+            ),
+            
+            // CTAs para leads B2B
+            'cta_leads_b2b_pequeno' => array(
+                'title' => 'Gere leads B2B qualificados mesmo com ticket baixo',
+                'description' => 'Estratégias específicas para volumes maiores de leads com processos de nutrição automatizados.',
+                'button_text' => 'Veja como funcionam nossas campanhas B2B',
+                'link' => '/cases/b2b-pequeno-ticket',
+                'type' => 'link'
+            ),
+            'cta_leads_b2b_medio' => array(
+                'title' => 'Escale sua geração de leads B2B com previsibilidade',
+                'description' => 'Combinamos inbound marketing, conteúdo estratégico e automação para criar um funil constante de oportunidades.',
+                'button_text' => 'Agende uma análise do seu funil',
+                'link' => '/consultoria/funnel-b2b',
+                'type' => 'link'
+            ),
+            'cta_leads_b2b_enterprise' => array(
+                'title' => 'Gere oportunidades enterprise de alto valor',
+                'description' => 'Estratégias account-based marketing (ABM) para engajar decisores e fechar contratos de grande porte.',
+                'button_text' => 'Conheça nossa metodologia ABM',
+                'link' => '/servicos/abm-enterprise',
+                'type' => 'link'
+            ),
+            
+            // CTAs para leads B2C
+            'cta_otimizacao_trafego' => array(
+                'title' => 'Reduza o custo por lead e aumente o ROI dos anúncios',
+                'description' => 'Otimizamos suas campanhas atuais com foco em conversão. Melhoramos qualidade do tráfego e experiência de landing pages.',
+                'button_text' => 'Solicite uma análise de campanhas',
+                'link' => '/trafego-pago/otimizacao',
+                'type' => 'link'
+            ),
+            'cta_aceleracao_organico' => array(
+                'title' => 'Escale seus resultados orgânicos com SEO estratégico',
+                'description' => 'Posicionamos seu site nas primeiras posições do Google para termos relevantes do seu negócio.',
+                'button_text' => 'Veja nosso plano de SEO',
+                'link' => '/seo/aceleracao',
+                'type' => 'link'
+            ),
+            'cta_escalagem_indicacao' => array(
+                'title' => 'Transforme indicações em um sistema previsível',
+                'description' => 'Criamos programas estruturados de indicação com incentivos e automação para multiplicar seus leads qualificados.',
+                'button_text' => 'Quero um programa de indicações',
+                'link' => '/estrategia/indicacao-premium',
+                'type' => 'link'
+            ),
+            'cta_estrategia_do_zero' => array(
+                'title' => 'Construa sua máquina de geração de leads do zero',
+                'description' => 'Desenvolvemos uma estratégia completa: atração, conversão e nutrição. Você foca em vender, nós trazemos os leads.',
+                'button_text' => 'Quero começar agora',
+                'link' => '/consultoria/estrategia-completa',
+                'type' => 'link'
+            ),
+            'cta_estrategia_mista' => array(
+                'title' => 'Estratégia integrada B2B + B2C para máximo resultado',
+                'description' => 'Segmentamos mensagens e canais para atender ambos os públicos sem diluir esforços ou orçamento.',
+                'button_text' => 'Fale com um estrategista',
+                'link' => '/consultoria/estrategia-mista',
+                'type' => 'link'
+            ),
+            
+            // CTAs para atendimento
+            'cta_integracao_whatsapp' => array(
+                'title' => 'Integre WhatsApp profissional ao seu site',
+                'description' => 'Botões inteligentes, mensagens automáticas e roteamento para o setor correto. Aumente o engajamento em tempo real.',
+                'button_text' => 'Quero integrar WhatsApp',
+                'link' => '/integracoes/whatsapp-business',
+                'type' => 'link'
+            ),
+            'cta_formularios_inteligentes' => array(
+                'title' => 'Formulários que realmente convertem',
+                'description' => 'Desenvolvemos formulários estratégicos com validação, segmentação e integração direta com seu CRM.',
+                'button_text' => 'Otimize meus formulários',
+                'link' => '/ux/formularios-conversao',
+                'type' => 'link'
+            ),
+            'cta_chatbot_inteligente' => array(
+                'title' => 'Automate 80% do atendimento com IA',
+                'description' => 'Chatbots inteligentes que qualificam leads, respondem dúvidas frequentes e agendam reuniões automaticamente.',
+                'button_text' => 'Conheça nossos chatbots',
+                'link' => '/automacao/chatbot-ia',
+                'type' => 'link'
+            ),
+            'cta_omnichannel' => array(
+                'title' => 'Centralize todos os canais de atendimento',
+                'description' => 'Integramos WhatsApp, chat, formulário, telefone e redes sociais em uma única plataforma de gestão.',
+                'button_text' => 'Quero atendimento omnichannel',
+                'link' => '/plataforma/omnichannel',
+                'type' => 'link'
+            ),
+            
+            // CTAs gerais
+            'cta_especialista' => array(
+                'title' => 'Fale diretamente com um especialista Futturu',
+                'description' => 'Nossos consultores seniores estão prontos para entender sua necessidade específica e propor a melhor solução.',
+                'button_text' => 'Agende uma conversa de 15 minutos',
+                'link' => '/contato/especialista',
+                'type' => 'link'
+            ),
+            'cta_orcamento' => array(
+                'title' => 'Receba um orçamento personalizado em até 24h',
+                'description' => 'Analisamos seu projeto e enviamos uma proposta detalhada com escopo, prazos e investimento.',
+                'button_text' => 'Solicitar orçamento agora',
+                'link' => '/contato/orcamento',
+                'type' => 'link'
+            ),
+            'cta_cases_sucesso' => array(
+                'title' => 'Conheça cases reais de transformação digital',
+                'description' => 'Veja como ajudamos empresas similares à sua a alcançar resultados extraordinários.',
+                'button_text' => 'Ver cases de sucesso',
+                'link' => '/cases',
                 'type' => 'link'
             )
         );
