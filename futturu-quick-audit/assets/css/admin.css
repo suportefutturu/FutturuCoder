@@ -1,0 +1,357 @@
+/**
+ * Futturu Quick Audit - Admin Styles
+ */
+
+.futturu-audit-wrap {
+    max-width: 1200px;
+}
+
+.futturu-audit-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.futturu-audit-header h2 {
+    margin-top: 0;
+    color: #1d2327;
+}
+
+.futturu-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.futturu-checklist li {
+    padding: 5px 0;
+    color: #3c434a;
+}
+
+/* Progress Indicator */
+.futturu-audit-progress {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f6f7f7;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.futturu-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #c3c4c7;
+    border-top-color: #2271b1;
+    border-radius: 50%;
+    animation: futturu-spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes futturu-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Report Styles */
+.futturu-report {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.futturu-report-header {
+    background: #f6f7f7;
+    padding: 20px;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.futturu-report-header h3 {
+    margin: 0 0 10px 0;
+    color: #1d2327;
+}
+
+.futturu-report-date,
+.futturu-report-url {
+    margin: 5px 0;
+    color: #646970;
+    font-size: 14px;
+}
+
+/* Score Cards */
+.futturu-score-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    background: #f6f7f7;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.futturu-score-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.futturu-score-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.futturu-score-value {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.futturu-score-label {
+    font-size: 14px;
+    color: #646970;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.futturu-overall .futturu-score-value {
+    color: #2271b1;
+}
+
+.futturu-speed .futturu-score-value {
+    color: #d63638;
+}
+
+.futturu-seo .futturu-score-value {
+    color: #00a0d2;
+}
+
+.futturu-security .futturu-score-value {
+    color: #00a32a;
+}
+
+/* Detailed Results */
+.futturu-detailed-results {
+    padding: 20px;
+}
+
+.futturu-section {
+    margin-bottom: 30px;
+}
+
+.futturu-section:last-child {
+    margin-bottom: 0;
+}
+
+.futturu-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    color: #1d2327;
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2271b1;
+}
+
+.futturu-icon {
+    font-size: 24px;
+}
+
+.futturu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.futturu-item {
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.futturu-item.futturu-pass {
+    border-left: 4px solid #00a32a;
+}
+
+.futturu-item.futturu-fail {
+    border-left: 4px solid #d63638;
+}
+
+.futturu-item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: #f6f7f7;
+    cursor: pointer;
+}
+
+.futturu-status-icon {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.futturu-pass .futturu-status-icon {
+    color: #00a32a;
+}
+
+.futturu-fail .futturu-status-icon {
+    color: #d63638;
+}
+
+.futturu-item-content {
+    padding: 15px;
+    background: #fff;
+}
+
+.futturu-item-content p {
+    margin: 0 0 10px 0;
+    color: #3c434a;
+}
+
+.futturu-recommendation {
+    background: #f0f6fc;
+    border-left: 3px solid #2271b1;
+    padding: 10px 15px;
+    margin-top: 10px;
+}
+
+.futturu-recommendation strong {
+    color: #1d2327;
+}
+
+/* CTA Section */
+.futturu-cta {
+    background: linear-gradient(135deg, #2271b1 0%, #00a0d2 100%);
+    color: #fff;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 4px;
+}
+
+.futturu-cta h3 {
+    margin: 0 0 15px 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+.futturu-cta p {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+}
+
+.futturu-cta-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.futturu-cta-benefits li {
+    padding: 5px 0;
+    font-size: 15px;
+}
+
+.futturu-cta-disclaimer {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-top: 15px;
+}
+
+.futturu-cta-button {
+    display: inline-block;
+    background: #fff;
+    color: #2271b1;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: all 0.2s ease;
+}
+
+.futturu-cta-button:hover {
+    background: #f6f7f7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Disclaimer */
+.futturu-disclaimer {
+    background: #f6f7f7;
+    padding: 15px 20px;
+    border-top: 1px solid #c3c4c7;
+    font-size: 13px;
+    color: #646970;
+}
+
+.futturu-disclaimer p {
+    margin: 0;
+}
+
+/* Error Messages */
+.futturu-error {
+    background: #fcf0f1;
+    border-left: 4px solid #d63638;
+    padding: 15px;
+    margin: 20px 0;
+    color: #d63638;
+}
+
+/* Shortcode Styles */
+.futturu-audit-shortcode {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.futturu-audit-btn {
+    background: #2271b1;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.futturu-audit-btn:hover {
+    background: #135e96;
+}
+
+.futturu-audit-btn:disabled {
+    background: #c3c4c7;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .futturu-score-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .futturu-score-value {
+        font-size: 36px;
+    }
+    
+    .futturu-cta {
+        padding: 20px;
+    }
+    
+    .futturu-cta h3 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .futturu-score-cards {
+        grid-template-columns: 1fr;
+    }
+}
