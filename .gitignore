@@ -1,0 +1,49 @@
+```
+# Dependencies
+node_modules/
+vendor/
+
+# Build artifacts
+dist/
+build/
+*.min.js
+*.min.css
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Testing
+.coverage
+coverage/
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# Distribution
+*.tar.gz
+*.egg-info/
+```
