@@ -1,62 +1,113 @@
-/**
- * Futturu Quick Audit - Admin JavaScript
- */
-
-(function($) {
-    'use strict';
-
-    $(document).ready(function() {
-        // Admin page audit button
-        $('#futturu-run-audit').on('click', function() {
-            runAudit($(this), $('#futturu-progress'), $('#futturu-results'));
-        });
-
-        // History detail function (global)
-        window.futturuShowHistory = function(index) {
-            var detailDiv = $('#futturu-history-detail');
-            
-            if (detailDiv.is(':visible')) {
-                detailDiv.hide();
-                return;
-            }
-            
-            // Get the report HTML from the stored data
-            // This would require passing the data to the frontend
-            // For now, we'll show a message
-            detailDiv.html('<div class="notice notice-info"><p>' + futturuAudit.completeText + '</p></div>').show();
-        };
-    });
-
-    /**
-     * Run audit via AJAX
-     */
-    function runAudit(button, progress, results) {
-        button.prop('disabled', true);
-        progress.show();
-        results.html('');
-
-        $.post(futturuAudit.ajaxUrl, {
-            action: 'futturu_run_audit',
-            nonce: futturuAudit.nonce
-        }, function(response) {
-            progress.hide();
-            button.prop('disabled', false);
-
-            if (response.success) {
-                results.html(response.data.html);
+jQuery(document).ready(function($) {
+    
+    $('#futturu-audit-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        var siteUrl = $('#futturu_site_url').val();
+        
+        if (!siteUrl) {
+            showError('Por favor, digite a URL do seu site.');
+            return;
+        }
+        
+        // Mostrar loading, esconder formulário
+        $('#futturu-input-section').hide();
+        $('#futturu-loading').show();
+        $('#futturu-error-msg').hide();
+        
+        $.ajax({
+            url: futturuAuditAjax.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'futturu_run_external_audit',
+                nonce: futturuAuditAjax.nonce,
+                site_url: siteUrl
+            },
+            success: function(response) {
+                $('#futturu-loading').hide();
                 
-                // Scroll to results
-                $('html, body').animate({
-                    scrollTop: results.offset().top - 100
-                }, 500);
-            } else {
-                results.html('<div class="futturu-error"><strong>Erro:</strong> ' + response.data.message + '</div>');
+                if (response.success) {
+                    displayResults(response.data);
+                } else {
+                    showError(response.data.message || 'Erro ao analisar o site.');
+                    $('#futturu-input-section').show();
+                }
+            },
+            error: function() {
+                $('#futturu-loading').hide();
+                showError('Erro de comunicação com o servidor. Tente novamente.');
+                $('#futturu-input-section').show();
             }
-        }).fail(function() {
-            progress.hide();
-            button.prop('disabled', false);
-            results.html('<div class="futturu-error"><strong>Erro:</strong> Falha na comunicação com o servidor. Tente novamente.</div>');
         });
+    });
+    
+    function displayResults(data) {
+        // Atualizar scores
+        animateScore('score-speed', data.scores.speed);
+        animateScore('score-seo', data.scores.seo);
+        animateScore('score-security', data.scores.security);
+        
+        // Gerar relatório detalhado
+        var reportHtml = '';
+        
+        // Velocidade
+        reportHtml += generateCategoryReport('Velocidade', data.details.speed);
+        
+        // SEO
+        reportHtml += generateCategoryReport('SEO', data.details.seo);
+        
+        // Segurança
+        reportHtml += generateCategoryReport('Segurança', data.details.security);
+        
+        $('#futturu-report-content').html(reportHtml);
+        $('#futturu-results').fadeIn();
     }
-
-})(jQuery);
+    
+    function generateCategoryReport(category, checks) {
+        var html = '<div class="report-category"><h4>' + category + '</h4><ul class="checks-list">';
+        
+        checks.forEach(function(check) {
+            var statusClass = check.pass ? 'check-pass' : 'check-fail';
+            var icon = check.pass ? '✓' : '✗';
+            
+            html += '<li class="' + statusClass + '">';
+            html += '<strong>' + icon + ' ' + check.name + '</strong><br>';
+            html += '<span class="check-msg">' + check.msg + '</span>';
+            
+            if (!check.pass && check.fix) {
+                html += '<div class="check-fix">💡 ' + check.fix + '</div>';
+            }
+            html += '</li>';
+        });
+        
+        html += '</ul></div>';
+        return html;
+    }
+    
+    function animateScore(elementId, targetScore) {
+        var $el = $('#' + elementId);
+        var current = 0;
+        var interval = setInterval(function() {
+            if (current >= targetScore) {
+                clearInterval(interval);
+            } else {
+                current++;
+                $el.text(current);
+            }
+        }, 15);
+        
+        // Adicionar classe de cor baseada no score
+        $el.removeClass('score-low score-medium score-high');
+        if (targetScore >= 80) {
+            $el.addClass('score-high');
+        } else if (targetScore >= 50) {
+            $el.addClass('score-medium');
+        } else {
+            $el.addClass('score-low');
+        }
+    }
+    
+    function showError(message) {
+        $('#futturu-error-msg').text(message).show();
+    }
+});

@@ -1,357 +1,325 @@
-/**
- * Futturu Quick Audit - Admin Styles
- */
+/* Futturu Audit - Lead Magnet Version */
 
-.futturu-audit-wrap {
-    max-width: 1200px;
+.futturu-audit-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
 }
 
 .futturu-audit-card {
     background: #fff;
-    border: 1px solid #c3c4c7;
-    border-radius: 4px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 40px;
+    border: 1px solid #e0e0e0;
 }
 
-.futturu-audit-header h2 {
-    margin-top: 0;
-    color: #1d2327;
-}
-
-.futturu-checklist {
-    list-style: none;
-    padding: 0;
-    margin: 15px 0;
-}
-
-.futturu-checklist li {
-    padding: 5px 0;
-    color: #3c434a;
-}
-
-/* Progress Indicator */
-.futturu-audit-progress {
+.futturu-header {
     text-align: center;
-    padding: 40px 20px;
-    background: #f6f7f7;
-    border-radius: 4px;
-    margin: 20px 0;
-}
-
-.futturu-spinner {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border: 4px solid #c3c4c7;
-    border-top-color: #2271b1;
-    border-radius: 50%;
-    animation: futturu-spin 1s linear infinite;
-    margin-bottom: 15px;
-}
-
-@keyframes futturu-spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Report Styles */
-.futturu-report {
-    background: #fff;
-    border: 1px solid #c3c4c7;
-    border-radius: 4px;
-    margin-top: 20px;
-    overflow: hidden;
-}
-
-.futturu-report-header {
-    background: #f6f7f7;
-    padding: 20px;
-    border-bottom: 1px solid #c3c4c7;
-}
-
-.futturu-report-header h3 {
-    margin: 0 0 10px 0;
-    color: #1d2327;
-}
-
-.futturu-report-date,
-.futturu-report-url {
-    margin: 5px 0;
-    color: #646970;
-    font-size: 14px;
-}
-
-/* Score Cards */
-.futturu-score-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 20px;
-    background: #f6f7f7;
-    border-bottom: 1px solid #c3c4c7;
-}
-
-.futturu-score-card {
-    background: #fff;
-    border: 1px solid #c3c4c7;
-    border-radius: 4px;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.2s ease;
-}
-
-.futturu-score-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.futturu-score-value {
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 10px;
-}
-
-.futturu-score-label {
-    font-size: 14px;
-    color: #646970;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.futturu-overall .futturu-score-value {
-    color: #2271b1;
-}
-
-.futturu-speed .futturu-score-value {
-    color: #d63638;
-}
-
-.futturu-seo .futturu-score-value {
-    color: #00a0d2;
-}
-
-.futturu-security .futturu-score-value {
-    color: #00a32a;
-}
-
-/* Detailed Results */
-.futturu-detailed-results {
-    padding: 20px;
-}
-
-.futturu-section {
     margin-bottom: 30px;
 }
 
-.futturu-section:last-child {
-    margin-bottom: 0;
-}
-
-.futturu-section-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    color: #1d2327;
-    margin: 0 0 15px 0;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #2271b1;
-}
-
-.futturu-icon {
-    font-size: 24px;
-}
-
-.futturu-items {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.futturu-item {
-    border: 1px solid #c3c4c7;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.futturu-item.futturu-pass {
-    border-left: 4px solid #00a32a;
-}
-
-.futturu-item.futturu-fail {
-    border-left: 4px solid #d63638;
-}
-
-.futturu-item-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 15px;
-    background: #f6f7f7;
-    cursor: pointer;
-}
-
-.futturu-status-icon {
-    font-size: 18px;
+.futturu-header h2 {
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 10px;
     font-weight: 700;
 }
 
-.futturu-pass .futturu-status-icon {
-    color: #00a32a;
+.futturu-header p {
+    color: #7f8c8d;
+    font-size: 16px;
 }
 
-.futturu-fail .futturu-status-icon {
-    color: #d63638;
+/* Form Styles */
+.futturu-form-group {
+    margin-bottom: 20px;
 }
 
-.futturu-item-content {
-    padding: 15px;
-    background: #fff;
-}
-
-.futturu-item-content p {
-    margin: 0 0 10px 0;
-    color: #3c434a;
-}
-
-.futturu-recommendation {
-    background: #f0f6fc;
-    border-left: 3px solid #2271b1;
-    padding: 10px 15px;
-    margin-top: 10px;
-}
-
-.futturu-recommendation strong {
-    color: #1d2327;
-}
-
-/* CTA Section */
-.futturu-cta {
-    background: linear-gradient(135deg, #2271b1 0%, #00a0d2 100%);
-    color: #fff;
-    padding: 30px;
-    margin: 20px;
-    border-radius: 4px;
-}
-
-.futturu-cta h3 {
-    margin: 0 0 15px 0;
-    color: #fff;
-    font-size: 24px;
-}
-
-.futturu-cta p {
-    margin: 0 0 15px 0;
-    line-height: 1.6;
-}
-
-.futturu-cta-benefits {
-    list-style: none;
-    padding: 0;
-    margin: 15px 0;
-}
-
-.futturu-cta-benefits li {
-    padding: 5px 0;
+.futturu-form-group label {
+    display: block;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 8px;
     font-size: 15px;
 }
 
-.futturu-cta-disclaimer {
-    font-size: 14px;
-    opacity: 0.9;
-    margin-top: 15px;
+.futturu-form-group input[type="url"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
 }
 
-.futturu-cta-button {
-    display: inline-block;
-    background: #fff;
-    color: #2271b1;
-    padding: 12px 24px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    margin-top: 15px;
-    transition: all 0.2s ease;
+.futturu-form-group input[type="url"]:focus {
+    outline: none;
+    border-color: #3498db;
 }
 
-.futturu-cta-button:hover {
-    background: #f6f7f7;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Disclaimer */
-.futturu-disclaimer {
-    background: #f6f7f7;
-    padding: 15px 20px;
-    border-top: 1px solid #c3c4c7;
+.futturu-form-group small {
+    display: block;
+    color: #95a5a6;
+    margin-top: 6px;
     font-size: 13px;
-    color: #646970;
 }
 
-.futturu-disclaimer p {
+/* Buttons */
+.futturu-btn-primary {
+    width: 100%;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.futturu-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+.futturu-btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Error Message */
+.futturu-error {
+    background: #fee;
+    border-left: 4px solid #e74c3c;
+    color: #c0392b;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+/* Loading Spinner */
+.futturu-loading-container {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.futturu-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ecf0f1;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.futturu-loading-container p {
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+/* Score Overview */
+.futturu-score-overview {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.score-card {
+    text-align: center;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    min-width: 120px;
+    flex: 1;
+    max-width: 150px;
+}
+
+.score-number {
+    display: block;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.score-label {
+    display: block;
+    font-size: 14px;
+    color: #7f8c8d;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.score-high .score-number { color: #27ae60; }
+.score-medium .score-number { color: #f39c12; }
+.score-low .score-number { color: #e74c3c; }
+
+.score-card.speed .score-number { color: #3498db; }
+.score-card.seo .score-number { color: #9b59b6; }
+.score-card.security .score-number { color: #e67e22; }
+
+/* Detailed Report */
+.futturu-detailed-report {
+    margin-bottom: 40px;
+}
+
+.futturu-detailed-report h3 {
+    color: #2c3e50;
+    font-size: 22px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.report-category {
+    margin-bottom: 30px;
+}
+
+.report-category h4 {
+    color: #34495e;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.checks-list {
+    list-style: none;
+    padding: 0;
     margin: 0;
 }
 
-/* Error Messages */
-.futturu-error {
-    background: #fcf0f1;
-    border-left: 4px solid #d63638;
+.checks-list li {
     padding: 15px;
-    margin: 20px 0;
-    color: #d63638;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    background: #f8f9fa;
+    border-left: 4px solid #bdc3c7;
 }
 
-/* Shortcode Styles */
-.futturu-audit-shortcode {
-    max-width: 800px;
-    margin: 0 auto;
+.checks-list li.check-pass {
+    background: #e8f8f5;
+    border-left-color: #27ae60;
 }
 
-.futturu-audit-btn {
-    background: #2271b1;
-    color: #fff;
-    border: none;
-    padding: 15px 30px;
+.checks-list li.check-fail {
+    background: #fdedec;
+    border-left-color: #e74c3c;
+}
+
+.checks-list strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.check-pass strong { color: #27ae60; }
+.check-fail strong { color: #e74c3c; }
+
+.check-msg {
+    display: block;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.check-fix {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #ddd;
+    color: #2980b9;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* CTA Box */
+.futturu-cta-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.futturu-cta-box h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.futturu-cta-box p {
     font-size: 16px;
-    font-weight: 600;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    line-height: 1.6;
+    opacity: 0.95;
+    margin-bottom: 20px;
 }
 
-.futturu-audit-btn:hover {
-    background: #135e96;
+.futturu-benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+    text-align: left;
+    display: inline-block;
 }
 
-.futturu-audit-btn:disabled {
-    background: #c3c4c7;
-    cursor: not-allowed;
+.futturu-benefits-list li {
+    padding: 8px 0;
+    font-size: 15px;
+}
+
+.futturu-btn-cta {
+    display: inline-block;
+    background: white;
+    color: #667eea;
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.futturu-btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
 /* Responsive */
-@media (max-width: 782px) {
-    .futturu-score-cards {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 600px) {
+    .futturu-audit-card {
+        padding: 25px;
     }
     
-    .futturu-score-value {
-        font-size: 36px;
+    .futturu-score-overview {
+        flex-direction: column;
     }
     
-    .futturu-cta {
-        padding: 20px;
+    .score-card {
+        max-width: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
     }
     
-    .futturu-cta h3 {
+    .score-number {
+        font-size: 32px;
+        margin-bottom: 0;
+    }
+    
+    .futturu-cta-box h3 {
         font-size: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .futturu-score-cards {
-        grid-template-columns: 1fr;
     }
 }
