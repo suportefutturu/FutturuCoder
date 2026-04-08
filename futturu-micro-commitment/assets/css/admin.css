@@ -187,7 +187,7 @@ textarea.fmc-cta-description {
 }
 
 /* Settings Form */
-.form-table th scope="row {
+.form-table th scope="row" {
     font-weight: 500;
     color: #374151;
 }
@@ -196,6 +196,11 @@ textarea.fmc-cta-description {
     color: #6b7280;
     font-size: 13px;
     margin-top: 5px;
+}
+
+/* Ensure tab content is visible */
+.fmc-tab-content.active {
+    display: block !important;
 }
 
 /* Responsive */

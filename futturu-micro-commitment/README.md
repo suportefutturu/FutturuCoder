@@ -1,174 +1,167 @@
 # Micro-Compromissos Guiados Futturu
 
-Plugin WordPress para engajar visitantes através de uma sequência interativa de micro-perguntas que conduzem a CTAs relevantes.
+Plugin WordPress para engajar visitantes através de sequências interativas de micro-perguntas que conduzem a CTAs relevantes.
 
-## Características
+## 🚀 Instalação Rápida
 
-- **Sem Gamificação**: Foco total em conversão de leads, sem pontos, placares ou elementos de jogo
-- **Sequência Inteligente**: Árvore de decisões baseada nas respostas do usuário
-- **CTAs Personalizados**: Call-to-actions altamente relevantes baseados no perfil construído
-- **Design Limpo**: Interface moderna que se integra a qualquer tema WordPress
-- **LGPD Compliance**: Opção de não rastrear IP dos usuários
-- **Proteção Anti-Spam**: Rate limiting configurável
+1. **Copie a pasta** `futturu-micro-commitment` para `/wp-content/plugins/`
+2. **Ative o plugin** no menu Plugins do WordPress
+3. **Automaticamente**, 9 perguntas e 23 CTAs serão carregados
+4. Use o shortcode `[futturu_micro_engage]` em qualquer página
 
-## Instalação
+## ⚠️ Solução de Problemas
 
-1. Faça upload da pasta `futturu-micro-commitment` para o diretório `/wp-content/plugins/`
-2. Ative o plugin através do menu "Plugins" no WordPress
-3. Acesse **Configurações > Micro-Engajamento Futturu** para configurar
+### "Nenhuma pergunta configurada" aparece no frontend
 
-## Uso
-
-### Shortcode
-
-Use o shortcode em qualquer página ou post:
-
+**Solução 1: Reative o plugin**
 ```
-[futturu_micro_engage]
+1. Vá em Plugins > Plugins Instalados
+2. Desative "Micro-Compromissos Guiados Futturu"
+3. Ative novamente
 ```
 
-### Parâmetros Opcionais
-
-```
-[futturu_micro_engage style="default" show_progress="true"]
-```
-
-- `style`: Estilo visual (padrão: "default")
-- `show_progress`: Exibir barra de progresso (padrão: "true")
-
-## Configuração
-
-### 1. Perguntas
-
-Acesse a aba **Perguntas** para:
-
-- Adicionar/editar perguntas
-- Definir opções de resposta
-- Associar cada resposta a uma próxima pergunta ou CTA final
-
-**Exemplo de Fluxo:**
-
-```
-Pergunta 1: "Qual o principal objetivo do seu website hoje?"
-  ├─ "Gerar mais vendas" → Pergunta 2
-  ├─ "Não tenho um site ainda" → CTA: Website Profissional
-  └─ "Outro" → CTA: Falar com Especialista
-
-Pergunta 2: "Seu site atual converte bem?"
-  ├─ "Sim" → CTA: Otimização
-  └─ "Não" → CTA: Auditoria de Conversão
+**Solução 2: Verifique se as opções foram salvas**
+```sql
+SELECT option_value FROM wp_options WHERE option_name IN ('fmc_questions', 'fmc_ctas');
 ```
 
-### 2. CTAs
+**Solução 3: Limpe cache**
+- Limpe cache do WordPress (se usar plugin de cache)
+- Limpe cache do navegador
+- Recarregue a página com Ctrl+F5
 
-Na aba **CTAs**, configure:
+### Painel Admin não carrega ou botões não funcionam
 
-- Título persuasivo
-- Descrição clara do valor oferecido
-- Texto do botão
-- Link de destino
-- Tipo (link externo ou modal)
+**Verifique:**
+1. Console do navegador (F12) por erros JavaScript
+2. Se jQuery está carregado no admin
+3. Permissões de usuário (precisa ser administrador)
 
-### 3. Respostas
+**Solução:**
+```
+1. Vá em Configurações > Micro-Engajamento Futturu
+2. Clique nas abas "Perguntas", "CTAs", etc.
+3. Se não carregar, desative e ative o plugin novamente
+```
 
-Visualize as respostas coletadas:
+### Perguntas/CTAs não salvam
 
-- Data e hora de cada resposta
-- Session ID do usuário
-- Caminho percorrido (sequência de respostas)
-- IP (se habilitado)
+**Verifique:**
+1. Console do navegador por erros AJAX
+2. nonce expirado (recarregue a página)
+3. Permissão de usuário (manage_options)
 
-### 4. Configurações Gerais
-
-- **Ativar Plugin**: Habilita/desabilita o widget no frontend
-- **Rastrear IP**: Armazena IP do usuário (considere a LGPD)
-- **Rate Limit**: Máximo de submissões por minuto por IP
-
-## Estrutura de Arquivos
+## 📋 Estrutura do Plugin
 
 ```
 futturu-micro-commitment/
-├── futturu-micro-commitment.php    # Arquivo principal do plugin
+├── futturu-micro-commitment.php    # Arquivo principal
 ├── includes/
-│   ├── class-fmc-admin.php         # Lógica do painel administrativo
-│   ├── class-fmc-frontend.php      # Lógica do frontend e shortcode
-│   └── class-fmc-data.php          # Manipulação de dados e banco
+│   ├── class-fmc-admin.php         # Painel administrativo
+│   ├── class-fmc-frontend.php      # Shortcode e AJAX
+│   └── class-fmc-data.php          # Banco de dados
 ├── assets/
 │   ├── css/
-│   │   ├── frontend.css            # Estilos do widget
-│   │   └── admin.css               # Estilos do admin
+│   │   ├── admin.css               # Estilos do admin
+│   │   └── frontend.css            # Estilos do widget
 │   └── js/
-│       ├── frontend.js             # JavaScript do widget
-│       └── admin.js                # JavaScript do admin
-└── README.md                       # Este arquivo
+│       ├── admin.js                # Lógica do admin
+│       └── frontend.js             # Lógica do widget
+├── README.md                       # Este arquivo
+└── EXEMPLOS_PRATICOS.md            # Exemplos detalhados
 ```
 
-## Banco de Dados
+## 🎯 Uso Básico
 
-O plugin cria a tabela `wp_fmc_responses` com os seguintes campos:
-
-- `id`: ID único da resposta
-- `session_id`: Identificador da sessão do usuário
-- `question_id`: ID da pergunta respondida
-- `answer`: Resposta do usuário
-- `path_taken`: Caminho percorrido até esta resposta
-- `user_ip`: IP do usuário (opcional)
-- `user_agent`: User agent do navegador
-- `created_at`: Data/hora da resposta
-
-## Personalização
-
-### CSS Personalizado
-
-O plugin usa classes prefixadas com `.fmc-`. Você pode sobrescrever os estilos no seu tema:
-
-```css
-.fmc-widget {
-    /* Seu CSS personalizado */
-}
-```
-
-### Novas Perguntas via Código
-
-Você pode adicionar perguntas programaticamente:
+### Shortcode
 
 ```php
-$questions = get_option('fmc_questions', array());
-$questions[] = array(
-    'id' => 'nova_pergunta',
-    'question' => 'Sua pergunta aqui?',
-    'answers' => array(
-        array(
-            'text' => 'Resposta 1',
-            'cta' => 'cta_id_destino'
-        )
-    )
-);
-update_option('fmc_questions', $questions);
+[futturu_micro_engage]
 ```
 
-## Boas Práticas
+Ou com parâmetros:
 
-1. **Mantenha o fluxo curto**: 2-4 perguntas são suficientes
-2. **Perguntas relevantes**: Cada pergunta deve agregar valor
-3. **CTAs claros**: Seja específico sobre o que o usuário receberá
-4. **Teste os fluxos**: Verifique todos os caminhos possíveis
-5. **Respeite a privacidade**: Considere desativar o rastreamento de IP
+```php
+[futturu_micro_engage style="default" show_progress="true"]
+```
 
-## Requisitos
+### No código PHP
 
-- WordPress 5.0 ou superior
-- PHP 7.4 ou superior
-- jQuery (incluído no WordPress)
+```php
+<?php echo do_shortcode('[futturu_micro_engage]'); ?>
+```
 
-## Licença
+## 🔧 Configuração
 
-GPL v2 ou posterior
+Acesse **Configurações > Micro-Engajamento Futturu** para:
 
-## Suporte
+- **Perguntas**: Adicionar/editar/remover perguntas e respostas
+- **CTAs**: Configurar calls-to-action finais
+- **Respostas**: Visualizar dados coletados
+- **Configurações**: Ativar/desativar, rate limit, privacidade
 
-Para dúvidas ou sugestões, visite: https://futturu.com.br
+## 📊 Dados Pré-configurados
+
+O plugin já vem com:
+
+- **9 perguntas** em 6 fluxos diferentes
+- **23 CTAs** segmentados por tipo de cliente
+- **8 fluxos de navegação** completos
+
+Veja todos os exemplos em `EXEMPLOS_PRATICOS.md`.
+
+## 🗄️ Banco de Dados
+
+Tabela criada: `wp_fmc_responses`
+
+Campos:
+- `id`: ID único da resposta
+- `session_id`: Sessão do usuário
+- `question_id`: ID da pergunta
+- `answer`: Resposta do usuário
+- `user_ip`: IP (opcional, conforme configuração)
+- `user_agent`: User agent do navegador
+- `path_taken`: Caminho percorrido
+- `created_at`: Data/hora da resposta
+
+## 🔒 Privacidade e LGPD
+
+- Rastreamento de IP é **desativado por padrão**
+- Ative em Configurações se necessário (respeite a LGPD)
+- Dados podem ser exportados em CSV pela aba "Respostas"
+
+## 🛡️ Segurança
+
+- Sanitização de todos os inputs
+- Nonce verification em AJAX
+- Rate limiting (5 submissões/minuto por IP)
+- Proteção contra spam
+
+## 📝 Changelog
+
+### 1.0.1
+- ✅ Correção: Inicialização automática de dados padrão
+- ✅ Correção: Detecção melhorada da página admin
+- ✅ Correção: CSS do admin com !important para tabs
+- ✅ Melhoria: Tabela DB com campo user_agent
+- ✅ Melhoria: Dados sempre carregados na ativação
+
+### 1.0.0
+- Lançamento inicial
+
+## 🤝 Suporte
+
+Para dúvidas ou problemas:
+
+1. Verifique este README e `EXEMPLOS_PRATICOS.md`
+2. Confira o console do navegador por erros
+3. Desative e ative o plugin para recarregar dados
+4. Contate: suporte@futturu.com.br
+
+## 📄 Licença
+
+GPL v2 or later - https://www.gnu.org/licenses/gpl-2.0.html
 
 ---
 
-**Futturu** - Transformando visitantes em leads qualificados
+**Desenvolvido por Futturu** - https://futturu.com.br

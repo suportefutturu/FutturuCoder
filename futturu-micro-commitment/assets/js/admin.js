@@ -315,7 +315,9 @@
     
     // Initialize when document is ready
     $(document).ready(function() {
-        if ($('.wrap h1').text().indexOf('Micro-Engajamento Futturu') !== -1) {
+        // Check if we're on the FMC admin page
+        if ($('.wrap h1').text().indexOf('Micro-Compromissos Guiados Futturu') !== -1 || 
+            $('#fmc-questions-container, #fmc-ctas-container').length > 0) {
             FMCAdmin.init();
         }
     });

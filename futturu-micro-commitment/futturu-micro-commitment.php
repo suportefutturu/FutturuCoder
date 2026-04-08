@@ -3,7 +3,7 @@
  * Plugin Name: Micro-Compromissos Guiados Futturu
  * Plugin URI: https://futturu.com.br
  * Description: Engaje visitantes do site com uma sequência interativa de micro-perguntas que conduzem a CTAs relevantes. Sem gamificação, focado em conversão de leads qualificados.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Futturu
  * Author URI: https://futturu.com.br
  * License: GPL v2 or later
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('FMC_VERSION', '1.0.0');
+define('FMC_VERSION', '1.0.1');
 define('FMC_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('FMC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -43,6 +43,8 @@ class Futturu_Micro_Commitment {
     
     private function __construct() {
         $this->init_hooks();
+        // Initialize default data on every load if not set
+        $this->maybe_init_defaults();
     }
     
     private function init_hooks() {
@@ -67,29 +69,11 @@ class Futturu_Micro_Commitment {
         FMC_Data::get_instance();
     }
     
-    public function activate() {
-        global $wpdb;
-        
-        // Create database table for responses
-        $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'fmc_responses';
-        
-        $sql = "CREATE TABLE $table_name (
-            id bigint(20) NOT NULL AUTO_INCREMENT,
-            session_id varchar(64) NOT NULL,
-            question_id varchar(64) NOT NULL,
-            answer text NOT NULL,
-            user_ip varchar(45) DEFAULT NULL,
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY  (id),
-            KEY session_id (session_id),
-            KEY created_at (created_at)
-        ) $charset_collate;";
-        
-        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-        dbDelta($sql);
-        
-        // Initialize default options if they don't exist
+    /**
+     * Initialize default data if options don't exist
+     */
+    private function maybe_init_defaults() {
+        // Only initialize if questions don't exist
         if (!get_option('fmc_questions')) {
             update_option('fmc_questions', $this->get_default_questions());
         }
@@ -109,6 +93,38 @@ class Futturu_Micro_Commitment {
         if (!get_option('fmc_rate_limit')) {
             update_option('fmc_rate_limit', 5);
         }
+    }
+    
+    public function activate() {
+        global $wpdb;
+        
+        // Create database table for responses
+        $charset_collate = $wpdb->get_charset_collate();
+        $table_name = $wpdb->prefix . 'fmc_responses';
+        
+        $sql = "CREATE TABLE $table_name (
+            id bigint(20) NOT NULL AUTO_INCREMENT,
+            session_id varchar(64) NOT NULL,
+            question_id varchar(64) NOT NULL,
+            answer text NOT NULL,
+            user_ip varchar(45) DEFAULT NULL,
+            user_agent text DEFAULT NULL,
+            path_taken text DEFAULT NULL,
+            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY  (id),
+            KEY session_id (session_id),
+            KEY created_at (created_at)
+        ) $charset_collate;";
+        
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        dbDelta($sql);
+        
+        // Always initialize defaults on activation
+        update_option('fmc_questions', $this->get_default_questions());
+        update_option('fmc_ctas', $this->get_default_ctas());
+        update_option('fmc_enabled', true);
+        update_option('fmc_track_ip', false);
+        update_option('fmc_rate_limit', 5);
         
         flush_rewrite_rules();
     }
