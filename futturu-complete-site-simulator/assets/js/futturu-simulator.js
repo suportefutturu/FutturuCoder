@@ -376,7 +376,7 @@
                 return {};
             }
             
-            // Get all form elements using FormData
+            // Get all form elements using FormData - from ENTIRE form
             const formData = new FormData(form);
             
             // Process FormData properly
@@ -414,6 +414,24 @@
                     });
                 }
             });
+            
+            // Handle "other" text fields for checkboxes
+            const otherFields = {
+                'menu_pages_other': 'menu_outra_check',
+                'addons_other': 'addon_outro_check',
+                'google_marketing_other': 'google_outro_check'
+            };
+            
+            for (const [otherField, otherCheckId] of Object.entries(otherFields)) {
+                const otherInput = form.querySelector(`input[name="${otherField}"]`);
+                const otherCheck = form.querySelector(`#${otherCheckId}`);
+                
+                if (otherCheck && otherCheck.checked && otherInput && otherInput.value.trim() !== '') {
+                    const arrayName = otherField.replace('_other', '');
+                    if (!data[arrayName]) data[arrayName] = [];
+                    data[arrayName].push(otherInput.value.trim());
+                }
+            }
             
             // Ensure boolean fields are properly set
             data['seo_basic'] = form.querySelector('input[name="seo_basic"]:checked') ? '1' : '0';
