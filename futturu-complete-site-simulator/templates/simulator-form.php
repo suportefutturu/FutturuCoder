@@ -651,18 +651,6 @@ if (!defined('ABSPATH')) {
                 <p><?php _e('Carregando resumo...', 'futturu-simulator'); ?></p>
             </div>
 
-            <div class="investment-display" id="investmentDisplay">
-                <h4><?php _e('Investimento Estimado', 'futturu-simulator'); ?></h4>
-                <div class="investment-value" id="investmentValue">-</div>
-                <div class="investment-range" id="investmentRange">-</div>
-                <p class="investment-note"><?php _e('Valores baseados na tabela Sinapro + experiência Futturu', 'futturu-simulator'); ?></p>
-            </div>
-
-            <div class="delivery-display" id="deliveryDisplay">
-                <h4><?php _e('Prazo Estimado', 'futturu-simulator'); ?></h4>
-                <div id="deliveryValue">-</div>
-            </div>
-
             <div class="step-navigation">
                 <button type="button" class="btn-prev"><?php _e('Anterior', 'futturu-simulator'); ?></button>
                 <button type="submit" class="btn-submit" id="btnSubmit"><?php _e('Enviar Simulação para Análise', 'futturu-simulator'); ?></button>

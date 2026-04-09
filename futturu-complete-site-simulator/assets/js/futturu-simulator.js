@@ -346,25 +346,6 @@
             html += '</div>';
 
             $('#summaryContainer').html(html);
-
-            // Update investment display with safety checks
-            if (calculation && calculation.formatted) {
-                $('#investmentValue').text(calculation.formatted.estimated || 'R$ 0,00');
-                $('#investmentRange').text(`Range: ${calculation.formatted.min || 'R$ 0,00'} - ${calculation.formatted.max || 'R$ 0,00'}`);
-            } else {
-                $('#investmentValue').text('R$ 0,00');
-                $('#investmentRange').text('Range: R$ 0,00 - R$ 0,00');
-            }
-
-            // Calculate delivery estimate
-            const deliveryTime = data.delivery_time || '30-45';
-            const deliveryLabels = {
-                '30-45': '30-45 dias úteis',
-                '45-60': '45-60 dias úteis',
-                '60-90': '60-90 dias úteis',
-                'flexivel': 'A combinar'
-            };
-            $('#deliveryValue').text(deliveryLabels[deliveryTime] || '30-45 dias úteis');
         },
 
         getFormData: function() {
