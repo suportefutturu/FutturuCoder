@@ -216,42 +216,12 @@
                 return;
             }
             
-            $.ajax({
-                url: futturuSimulator.ajaxUrl,
-                type: 'POST',
-                data: {
-                    action: 'futturu_calculate',
-                    nonce: futturuSimulator.nonce,
-                    ...formData
-                },
-                beforeSend: () => {
-                    console.log('Iniciando cálculo AJAX...');
-                    $('#summaryContainer').html('<p>' + futturuSimulator.strings.calculating + '</p>');
-                    $('#investmentValue').text('-');
-                    $('#investmentRange').text('-');
-                    $('#deliveryValue').text('-');
-                },
-                success: (response) => {
-                    console.log('AJAX Response:', response);
-                    if (response.success && response.data && response.data.calculation) {
-                        console.log('Cálculo recebido:', response.data.calculation);
-                        this.displaySummary(formData, response.data.calculation);
-                    } else {
-                        console.error('Calculation error:', response);
-                        $('#summaryContainer').html('<p>Erro ao calcular. Tente novamente.</p>');
-                    }
-                },
-                error: (xhr, status, error) => {
-                    console.error('AJAX Error:', status, error);
-                    console.error('XHR details:', xhr);
-                    $('#summaryContainer').html('<p>Erro ao calcular. Verifique sua conexão e tente novamente.</p>');
-                }
-            });
+            // Display summary directly without AJAX calculation
+            this.displaySummary(formData);
         },
 
-        displaySummary: function(data, calculation) {
+        displaySummary: function(data) {
             console.log('Display summary - data:', data);
-            console.log('Display summary - calculation:', calculation);
             
             let html = '';
 
@@ -298,10 +268,63 @@
             html += '<h4>🎯 Recursos</h4>';
             html += '<ul>';
             if (data.menu_pages && Array.isArray(data.menu_pages) && data.menu_pages.length > 0) {
-                html += `<li><strong>Páginas do Menu:</strong> ${data.menu_pages.join(', ')}</li>`;
+                const menuLabels = data.menu_pages.map(page => {
+                    const labels = {
+                        'pagina_inicial': 'Página Inicial',
+                        'sobre_nos': 'Sobre Nós',
+                        'produtos_servicos': 'Produtos/Serviços',
+                        'portfolio': 'Portfólio',
+                        'depoimentos': 'Depoimentos',
+                        'blog': 'Blog',
+                        'contato': 'Contato',
+                        'faq': 'FAQ',
+                        'politica_privacidade': 'Política de Privacidade',
+                        'termos_servico': 'Termos de Serviço',
+                        'equipe': 'Equipe',
+                        'carreira': 'Carreira',
+                        'localizacao': 'Localização',
+                        'redes_sociais': 'Redes Sociais',
+                        'newsletter': 'Newsletter',
+                        'cta': 'Chamada para Ação',
+                        'testemunhos': 'Testemunhos',
+                        'videos': 'Vídeos',
+                        'galeria': 'Galeria',
+                        'parceiros': 'Parceiros',
+                        'outra': data.menu_pages_other || 'Outra'
+                    };
+                    return labels[page] || page;
+                });
+                html += `<li><strong>Páginas do Menu:</strong> ${menuLabels.join(', ')}</li>`;
             }
             if (data.addons && Array.isArray(data.addons) && data.addons.length > 0) {
-                html += `<li><strong>Add-ons:</strong> ${data.addons.join(', ')}</li>`;
+                const addonLabels = data.addons.map(addon => {
+                    const labels = {
+                        'faq_page': 'Página FAQ',
+                        'event_calendar': 'Calendário de Eventos',
+                        'registration_form': 'Formulário de Inscrição',
+                        'login_area': 'Área de Login',
+                        'product_search': 'Busca de Produtos/Serviços',
+                        'ecommerce': 'E-commerce',
+                        'sitemap': 'Mapa do Site',
+                        'custom_menu': 'Menu Personalizado',
+                        'newsletter': 'Newsletter',
+                        'reviews': 'Avaliações',
+                        'quizzes': 'Questionários',
+                        'tutorial_videos': 'Vídeos Tutoriais',
+                        'ads': 'Anúncios',
+                        'budget_calculator': 'Calculadora de Orçamento',
+                        'career_pages': 'Páginas de Carreira',
+                        'corporate_videos': 'Vídeos Corporativos',
+                        'phone_support': 'Atendimento Telefônico',
+                        'booking_system': 'Sistema de Reservas',
+                        'vfaq': 'VFAQ',
+                        'translations': 'Traduções',
+                        'comparison_tool': 'Ferramenta de Comparação',
+                        'outro': data.addons_other || 'Outro'
+                    };
+                    return labels[addon] || addon;
+                });
+                html += `<li><strong>Add-ons:</strong> ${addonLabels.join(', ')}</li>`;
             }
             if (data.seo_basic == '1' || data.seo_basic === true) html += '<li>SEO Básico</li>';
             if (data.seo_advanced == '1' || data.seo_advanced === true) html += '<li>SEO Avançado</li>';
