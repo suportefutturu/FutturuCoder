@@ -176,18 +176,19 @@
         },
 
         updateProgressBar: function() {
+            const self = this;
             $('.progress-step').each(function(index) {
                 const $this = $(this);
                 const stepNum = parseInt($this.data('step')) + 1;
 
                 $this.removeClass('active completed');
 
-                if (stepNum === this.currentStep) {
+                if (stepNum === self.currentStep) {
                     $this.addClass('active');
-                } else if (stepNum < this.currentStep) {
+                } else if (stepNum < self.currentStep) {
                     $this.addClass('completed');
                 }
-            }.bind(this));
+            });
         },
 
         handleConditionalFields: function() {
@@ -205,6 +206,9 @@
         calculateAndShowSummary: function() {
             const formData = this.getFormData();
             
+            // Debug log
+            console.log('Form data being sent:', formData);
+            
             $.ajax({
                 url: futturuSimulator.ajaxUrl,
                 type: 'POST',
@@ -215,21 +219,30 @@
                 },
                 beforeSend: () => {
                     $('#summaryContainer').html('<p>' + futturuSimulator.strings.calculating + '</p>');
+                    $('#investmentValue').text('-');
+                    $('#investmentRange').text('-');
+                    $('#deliveryValue').text('-');
                 },
                 success: (response) => {
+                    console.log('AJAX Response:', response);
                     if (response.success) {
                         this.displaySummary(formData, response.data.calculation);
                     } else {
-                        $('#summaryContainer').html('<p>Erro ao calcular.</p>');
+                        console.error('Calculation error:', response.data);
+                        $('#summaryContainer').html('<p>Erro ao calcular. Tente novamente.</p>');
                     }
                 },
-                error: () => {
-                    $('#summaryContainer').html('<p>Erro ao calcular.</p>');
+                error: (xhr, status, error) => {
+                    console.error('AJAX Error:', status, error);
+                    $('#summaryContainer').html('<p>Erro ao calcular. Verifique sua conexão e tente novamente.</p>');
                 }
             });
         },
 
         displaySummary: function(data, calculation) {
+            console.log('Display summary - data:', data);
+            console.log('Display summary - calculation:', calculation);
+            
             let html = '';
 
             // Project Info
@@ -247,14 +260,14 @@
             html += '<div class="summary-section">';
             html += '<h4>🎯 Recursos</h4>';
             html += '<ul>';
-            if (data.menu_pages && data.menu_pages.length > 0) {
-                html += `<li><strong>Páginas:</strong> ${data.menu_pages.join(', ')}</li>`;
+            if (data.menu_pages && Array.isArray(data.menu_pages) && data.menu_pages.length > 0) {
+                html += `<li><strong>Páginas do Menu:</strong> ${data.menu_pages.join(', ')}</li>`;
             }
-            if (data.addons && data.addons.length > 0) {
+            if (data.addons && Array.isArray(data.addons) && data.addons.length > 0) {
                 html += `<li><strong>Add-ons:</strong> ${data.addons.join(', ')}</li>`;
             }
-            if (data.seo_basic) html += '<li>SEO Básico</li>';
-            if (data.seo_advanced) html += '<li>SEO Avançado</li>';
+            if (data.seo_basic == '1' || data.seo_basic === true) html += '<li>SEO Básico</li>';
+            if (data.seo_advanced == '1' || data.seo_advanced === true) html += '<li>SEO Avançado</li>';
             html += '</ul>';
             html += '</div>';
 
@@ -272,18 +285,23 @@
             html += '<div class="summary-section">';
             html += '<h4>👤 Cliente</h4>';
             html += '<ul>';
-            html += `<li><strong>Nome:</strong> ${data.client_name}</li>`;
-            html += `<li><strong>E-mail:</strong> ${data.client_email}</li>`;
-            html += `<li><strong>WhatsApp:</strong> ${data.client_phone}</li>`;
-            html += `<li><strong>Segmento:</strong> ${data.market_segment}</li>`;
+            html += `<li><strong>Nome:</strong> ${data.client_name || 'Não informado'}</li>`;
+            html += `<li><strong>E-mail:</strong> ${data.client_email || 'Não informado'}</li>`;
+            html += `<li><strong>WhatsApp:</strong> ${data.client_phone || 'Não informado'}</li>`;
+            html += `<li><strong>Segmento:</strong> ${data.market_segment || 'Não informado'}</li>`;
             html += '</ul>';
             html += '</div>';
 
             $('#summaryContainer').html(html);
 
-            // Update investment display
-            $('#investmentValue').text(calculation.formatted.estimated);
-            $('#investmentRange').text(`Range: ${calculation.formatted.min} - ${calculation.formatted.max}`);
+            // Update investment display with safety checks
+            if (calculation && calculation.formatted) {
+                $('#investmentValue').text(calculation.formatted.estimated || 'R$ 0,00');
+                $('#investmentRange').text(`Range: ${calculation.formatted.min || 'R$ 0,00'} - ${calculation.formatted.max || 'R$ 0,00'}`);
+            } else {
+                $('#investmentValue').text('R$ 0,00');
+                $('#investmentRange').text('Range: R$ 0,00 - R$ 0,00');
+            }
 
             // Calculate delivery estimate
             const deliveryTime = data.delivery_time || '30-45';
@@ -297,20 +315,46 @@
         },
 
         getFormData: function() {
-            const formData = new FormData(this.form[0]);
             const data = {};
-
-            formData.forEach((value, key) => {
-                if (data[key]) {
-                    if (!Array.isArray(data[key])) {
-                        data[key] = [data[key]];
+            const form = this.form[0];
+            
+            // Get all form elements
+            const formData = new FormData(form);
+            
+            // Process FormData properly
+            for (let [key, value] of formData.entries()) {
+                // Handle array fields (checkboxes)
+                if (key.endsWith('[]')) {
+                    const cleanKey = key.replace('[]', '');
+                    if (!data[cleanKey]) {
+                        data[cleanKey] = [];
                     }
-                    data[key].push(value);
+                    data[cleanKey].push(value);
                 } else {
-                    data[key] = value;
+                    // For radio buttons and other fields, only take the first/selected value
+                    if (!data[key]) {
+                        data[key] = value;
+                    }
+                }
+            }
+            
+            // Also manually collect checked checkboxes to ensure we get them all
+            const checkboxArrays = ['menu_pages', 'addons', 'google_marketing', 'hosting_problems', 
+                                    'hosting_features', 'proposal_type', 'contact_channel'];
+            
+            checkboxArrays.forEach(arrayName => {
+                const checkboxes = form.querySelectorAll(`input[name="${arrayName}[]"]:checked`);
+                if (checkboxes.length > 0) {
+                    data[arrayName] = [];
+                    checkboxes.forEach(cb => {
+                        data[arrayName].push(cb.value);
+                    });
                 }
             });
-
+            
+            // Debug log
+            console.log('getFormData result:', data);
+            
             return data;
         },
 
