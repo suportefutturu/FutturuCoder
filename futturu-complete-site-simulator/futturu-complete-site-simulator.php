@@ -42,6 +42,22 @@ require_once FUTTURU_SIMULATOR_PLUGIN_DIR . 'admin/class-admin-settings.php';
 require_once FUTTURU_SIMULATOR_PLUGIN_DIR . 'admin/class-admin-leads.php';
 
 /**
+ * Activation hook - must be defined before the class is used
+ */
+function futturu_simulator_activate() {
+    Futturu_Database::activate();
+}
+register_activation_hook(__FILE__, 'futturu_simulator_activate');
+
+/**
+ * Deactivation hook
+ */
+function futturu_simulator_deactivate() {
+    Futturu_Database::deactivate();
+}
+register_deactivation_hook(__FILE__, 'futturu_simulator_deactivate');
+
+/**
  * Main Plugin Class
  */
 class Futturu_Simulator_Plugin {
@@ -121,9 +137,3 @@ function futturu_simulator_init() {
     return Futturu_Simulator_Plugin::get_instance();
 }
 add_action('plugins_loaded', 'futturu_simulator_init');
-
-// Activation hook
-register_activation_hook(__FILE__, array('Futturu_Database', 'activate'));
-
-// Deactivation hook
-register_deactivation_hook(__FILE__, array('Futturu_Database', 'deactivate'));
