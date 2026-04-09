@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Simulador Futturu</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Teste do Botão Gerar Descrição</h1>
+    
+    <div id="test-area">
+        <input type="text" id="business_name" placeholder="Nome do Negócio" value="Café do João">
+        <select id="business_category">
+            <option value="">Selecione...</option>
+            <option value="Café" selected>Café</option>
+            <option value="Restaurante">Restaurante</option>
+        </select>
+        <input type="text" id="business_locality" placeholder="Localidade" value="Belém, PA">
+        <input type="text" id="business_services" placeholder="Serviços" value="Cafés especiais, Bolos caseiros">
+        <input type="text" id="business_audience" placeholder="Público" value="Moradores do bairro">
+        <input type="text" id="business_differential" placeholder="Diferencial" value="Ambiente acolhedor">
+        
+        <button type="button" id="btn-generate-description">Gerar Descrição</button>
+        
+        <div id="generated-description-text">
+            <em>A descrição aparecerá aqui...</em>
+        </div>
+    </div>
+    
+    <script>
+    // Mock futturuSimulator object
+    window.futturuSimulator = {
+        templates: [
+            'Transforme seu {categoria} em referência absoluta em {localidade}! O {nome} se destaca por oferecer {servicos}, sempre com o diferencial de {diferencial}.',
+            'Descubra o {nome}, o {categoria} que está revolucionando o mercado em {localidade}.',
+            '{nome}: Muito mais que um {categoria}, uma experiência completa em {localidade}.'
+        ],
+        strings: {
+            fillRequiredFields: 'Preencha pelo menos Nome e Categoria',
+            descriptionGenerated: 'Descrição gerada com sucesso!',
+            required: 'Campo obrigatório'
+        }
+    };
+    
+    $(document).ready(function() {
+        console.log('jQuery loaded:', typeof $);
+        console.log('futturuSimulator:', window.futturuSimulator);
+        console.log('Button exists:', $('#btn-generate-description').length);
+        
+        $('#btn-generate-description').on('click', function() {
+            console.log('Button clicked!');
+            
+            const businessName = $('#business_name').val().trim();
+            const category = $('#business_category').val();
+            
+            console.log('Values:', { businessName, category });
+            
+            if (!businessName || !category) {
+                alert('Preencha Nome e Categoria!');
+                return;
+            }
+            
+            const templates = window.futturuSimulator.templates;
+            const template = templates[Math.floor(Math.random() * templates.length)];
+            
+            const description = template
+                .replace(/{nome}/g, businessName)
+                .replace(/{categoria}/g, category)
+                .replace(/{localidade}/g, $('#business_locality').val() || 'sua região')
+                .replace(/{servicos}/g, $('#business_services').val() || 'serviços')
+                .replace(/{publico}/g, $('#business_audience').val() || 'público')
+                .replace(/{diferencial}/g, $('#business_differential').val() || 'diferencial');
+            
+            $('#generated-description-text').html('<p>' + description + '</p>');
+            alert('Descrição gerada: ' + description);
+        });
+    });
+    </script>
+</body>
+</html>

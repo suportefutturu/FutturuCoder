@@ -215,6 +215,8 @@
 
     // Generate Description from Template
     function generateDescription() {
+        console.log('generateDescription called');
+        
         const businessName = $('#business_name').val().trim();
         const category = $('#business_category').val();
         const locality = $('#business_locality').val().trim();
@@ -222,8 +224,11 @@
         const audience = $('#business_audience').val().trim();
         const differential = $('#business_differential').val().trim();
         
+        console.log('Form values:', { businessName, category, locality, services, audience, differential });
+        
         // Validate required fields
         if (!businessName || !category) {
+            console.log('Missing required fields');
             showMessage(futturuSimulator.strings.fillRequiredFields, 'error');
             return;
         }
@@ -237,6 +242,7 @@
         simulator.data.differential = differential;
 
         // Get templates from backend (passed via wp_localize_script)
+        console.log('Templates from backend:', futturuSimulator.templates);
         const templates = futturuSimulator.templates || [
             'Transforme seu {categoria} em referência absoluta em {localidade}! O {nome} se destaca por oferecer {servicos}, sempre com o diferencial de {diferencial}. A escolha perfeita para {publico} que exige qualidade, confiança e excelência no atendimento.',
             'Descubra o {nome}, o {categoria} que está revolucionando o mercado em {localidade}. Especializado em {servicos}, nosso maior orgulho é {diferencial}. Atendemos {publico} com dedicação, profissionalismo e resultados comprovados.',
@@ -253,6 +259,7 @@
         // Select random template
         const templateIndex = Math.floor(Math.random() * templates.length);
         let template = templates[templateIndex];
+        console.log('Selected template index:', templateIndex);
 
         // Replace placeholders with actual values or smart defaults
         template = template.replace(/{nome}/g, simulator.data.businessName);
@@ -263,6 +270,7 @@
         template = template.replace(/{diferencial}/g, simulator.data.differential || 'qualidade incomparável');
 
         simulator.data.generatedDescription = template;
+        console.log('Generated description:', template);
 
         // Update UI with animation effect
         $descriptionText.hide().html(`<p>${template}</p>`).fadeIn(300);

@@ -164,6 +164,14 @@ class Futturu_Website_Simulator {
         );
     }
     
+    /**
+     * Get default templates as a simple array (for JS fallback)
+     */
+    private function get_default_templates_array() {
+        $templates = $this->get_default_templates();
+        return array_column($templates, 'template');
+    }
+    
     public function add_admin_menu() {
         add_options_page(
             __('Simulador WebSite Futturu', 'futturu-website-simulator'),
@@ -342,6 +350,8 @@ class Futturu_Website_Simulator {
     }
     
     public function enqueue_assets() {
+        $options = get_option('futturu_simulator_options', array());
+        
         wp_enqueue_style(
             'futturu-simulator-css',
             FUTTURU_SIMULATOR_PLUGIN_URL . 'assets/css/simulator.css',
@@ -357,10 +367,24 @@ class Futturu_Website_Simulator {
             true
         );
         
+        $templates = array();
+        if (!empty($options['futturu_templates']) && is_array($options['futturu_templates'])) {
+            foreach ($options['futturu_templates'] as $template_item) {
+                if (isset($template_item['template'])) {
+                    $templates[] = $template_item['template'];
+                }
+            }
+        }
+        
+        // Fallback to default templates if none configured
+        if (empty($templates)) {
+            $templates = $this->get_default_templates_array();
+        }
+        
         wp_localize_script('futturu-simulator-js', 'futturuSimulator', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('futturu_simulator_nonce'),
-            'templates' => $options['futturu_templates'] ? array_column($options['futturu_templates'], 'template') : array(),
+            'templates' => $templates,
             'strings' => array(
                 'step1' => __('Escolha o Tipo de Site', 'futturu-website-simulator'),
                 'step2' => __('Informações do Negócio', 'futturu-website-simulator'),
@@ -387,6 +411,10 @@ class Futturu_Website_Simulator {
         if (!isset($options['futturu_enabled']) || !$options['futturu_enabled']) {
             return '<p>' . __('Simulador temporariamente indisponível.', 'futturu-website-simulator') . '</p>';
         }
+        
+        // Ensure scripts and styles are loaded
+        wp_enqueue_style('futturu-simulator-css');
+        wp_enqueue_script('futturu-simulator-js');
         
         $site_types = isset($options['futturu_site_types']) ? $options['futturu_site_types'] : array();
         $categories = isset($options['futturu_categories']) ? $options['futturu_categories'] : array();
