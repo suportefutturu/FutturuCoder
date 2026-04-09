@@ -16,11 +16,22 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-// Define plugin constants
-define('FUTTURU_SIMULATOR_VERSION', '1.0.0');
-define('FUTTURU_SIMULATOR_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('FUTTURU_SIMULATOR_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('FUTTURU_SIMULATOR_DB_VERSION', '1.0');
+// Define plugin constants (with checks to prevent redefinition)
+if (!defined('FUTTURU_SIMULATOR_VERSION')) {
+    define('FUTTURU_SIMULATOR_VERSION', '1.0.0');
+}
+
+if (!defined('FUTTURU_SIMULATOR_PLUGIN_DIR')) {
+    define('FUTTURU_SIMULATOR_PLUGIN_DIR', plugin_dir_path(__FILE__));
+}
+
+if (!defined('FUTTURU_SIMULATOR_PLUGIN_URL')) {
+    define('FUTTURU_SIMULATOR_PLUGIN_URL', plugin_dir_url(__FILE__));
+}
+
+if (!defined('FUTTURU_SIMULATOR_DB_VERSION')) {
+    define('FUTTURU_SIMULATOR_DB_VERSION', '1.0');
+}
 
 // Include required files
 require_once FUTTURU_SIMULATOR_PLUGIN_DIR . 'includes/class-database.php';
