@@ -249,6 +249,64 @@
     font-weight: 600;
 }
 
+.futturu-description-wrapper {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.futturu-description-wrapper textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.futturu-description-wrapper textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+    background: #ffffff;
+}
+
+.futturu-edit-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.futturu-edit-hint .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.futturu-feedback-msg {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    min-height: 20px;
+}
+
+.futturu-feedback-msg.success {
+    color: #d4edda;
+}
+
+.futturu-feedback-msg.error {
+    color: #f8d7da;
+}
+
 .description-content {
     background: rgba(255, 255, 255, 0.15);
     padding: 20px;

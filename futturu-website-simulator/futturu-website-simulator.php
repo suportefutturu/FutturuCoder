@@ -526,16 +526,21 @@ class Futturu_Website_Simulator {
                         </div>
                     </div>
                     
-                    <!-- Generated Description Preview -->
+                    <!-- Generated Description (Editable) -->
                     <div class="futturu-generated-description">
-                        <h4><?php _e('Descrição Gerada Automaticamente', 'futturu-website-simulator'); ?></h4>
-                        <div id="generated-description-text" class="description-content">
-                            <em><?php _e('Preencha os campos acima e clique em "Gerar Descrição" para criar seu texto...', 'futturu-website-simulator'); ?></em>
+                        <h4><?php _e('Descrição Gerada (Personalizável)', 'futturu-website-simulator'); ?></h4>
+                        <div class="futturu-description-wrapper">
+                            <textarea id="generated-description-text" name="generated_description" rows="5" placeholder="<?php _e('Preencha os campos acima e clique em "Gerar Descrição"...', 'futturu-website-simulator'); ?>"></textarea>
+                            <div class="futturu-edit-hint">
+                                <span class="dashicons dashicons-edit"></span>
+                                <small><?php _e('Você pode editar este texto após gerar.', 'futturu-website-simulator'); ?></small>
+                            </div>
                         </div>
                         <button type="button" id="btn-generate-description" class="futturu-btn-generate">
                             <span class="dashicons dashicons-admin-media"></span>
-                            <?php _e('Gerar Descrição', 'futturu-website-simulator'); ?>
+                            <?php _e('Gerar Descrição Automática', 'futturu-website-simulator'); ?>
                         </button>
+                        <span id="desc-feedback" class="futturu-feedback-msg"></span>
                     </div>
                     
                     <!-- Website Preview Mockup -->

@@ -54,6 +54,15 @@
         $('#business_name, #business_category, #business_locality, #business_services, #business_audience, #business_differential')
             .on('input change', debounce(updatePreview, 500));
 
+        // Live update preview when description textarea is edited manually
+        $descriptionText.on('input change', debounce(function() {
+            const manualText = $(this).val().trim();
+            if (manualText) {
+                simulator.data.generatedDescription = manualText;
+                updatePreview();
+            }
+        }, 300));
+
         // Site type selection
         $('input[name="site_type"]').on('change', function() {
             simulator.data.siteType = $(this).val();
@@ -157,10 +166,14 @@
                 }
             });
 
-            // Check if description was generated, warn user if not
-            if (isValid && !simulator.data.generatedDescription) {
-                showMessage('Clique em "Gerar Descrição" para criar seu texto personalizado', 'error');
+            // Check if description was generated or manually entered, warn user if not
+            const manualDescription = $descriptionText.val().trim();
+            if (isValid && !simulator.data.generatedDescription && !manualDescription) {
+                showMessage('Clique em "Gerar Descrição" ou digite sua descrição personalizada', 'error');
                 isValid = false;
+            } else if (isValid && manualDescription) {
+                // Save manual description to simulator data
+                simulator.data.generatedDescription = manualDescription;
             }
         }
 
@@ -272,8 +285,8 @@
         simulator.data.generatedDescription = template;
         console.log('Generated description:', template);
 
-        // Update UI with animation effect
-        $descriptionText.hide().html(`<p>${template}</p>`).fadeIn(300);
+        // Update UI - set textarea value for editing
+        $descriptionText.val(template).fadeIn(300);
         
         // Visual feedback
         const $btn = $('#btn-generate-description');
@@ -292,9 +305,13 @@
         const businessName = $('#business_name').val().trim() || 'Seu Negócio';
         $previewBusinessName.text(businessName);
 
-        // Update description
-        if (simulator.data.generatedDescription) {
-            $previewDescription.text(simulator.data.generatedDescription);
+        // Update description - get from textarea (editable) or generated data
+        let descriptionText = $descriptionText.val().trim();
+        if (!descriptionText) {
+            descriptionText = simulator.data.generatedDescription;
+        }
+        if (descriptionText) {
+            $previewDescription.text(descriptionText);
         } else {
             const category = $('#business_category').val() || 'negócio';
             const locality = $('#business_locality').val().trim() || 'sua cidade';
@@ -379,6 +396,21 @@
 
     // Show Message
     function showMessage(message, type) {
+        // Try to show in description feedback first (for step 2)
+        const $descFeedback = $('#desc-feedback');
+        if ($descFeedback.length && simulator.currentStep === 2) {
+            $descFeedback
+                .removeClass('success error')
+                .addClass(type)
+                .text(message)
+                .fadeIn(300);
+            
+            setTimeout(function() {
+                $descFeedback.fadeOut(300);
+            }, 5000);
+        }
+        
+        // Also show in main message box
         $messageBox
             .removeClass('success error')
             .addClass(type)
