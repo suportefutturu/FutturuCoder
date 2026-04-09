@@ -119,6 +119,7 @@
         validateStep: function(step) {
             const stepEl = $(`.simulator-step[data-step="${step}"]`);
             let isValid = true;
+            const self = this;
 
             // Remove previous errors
             stepEl.find('.error-message').remove();
@@ -131,7 +132,7 @@
 
                 if (!value || value.trim() === '') {
                     isValid = false;
-                    this.showError($this, futturuSimulator.strings.required);
+                    self.showError($this, futturuSimulator.strings.required);
                 }
 
                 // Email validation
@@ -139,7 +140,7 @@
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     if (!emailRegex.test(value)) {
                         isValid = false;
-                        this.showError($this, futturuSimulator.strings.invalidEmail);
+                        self.showError($this, futturuSimulator.strings.invalidEmail);
                     }
                 }
 
@@ -148,10 +149,10 @@
                     const phone = value.replace(/\D/g, '');
                     if (phone.length < 10 || phone.length > 11) {
                         isValid = false;
-                        this.showError($this, futturuSimulator.strings.invalidPhone);
+                        self.showError($this, futturuSimulator.strings.invalidPhone);
                     }
                 }
-            }.bind(this));
+            });
 
             // Radio button validation for complexity
             if (step === 1) {
