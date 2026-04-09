@@ -47,7 +47,10 @@
         $('.futturu-btn-next').on('click', handleNextStep);
         $('.futturu-btn-back').on('click', handlePrevStep);
 
-        // Form input changes for live preview
+        // Generate Description button
+        $('#btn-generate-description').on('click', generateDescription);
+
+        // Form input changes for live preview (no auto-generation)
         $('#business_name, #business_category, #business_locality, #business_services, #business_audience, #business_differential')
             .on('input change', debounce(updatePreview, 500));
 
@@ -154,9 +157,10 @@
                 }
             });
 
-            // Generate description if not already done
+            // Check if description was generated, warn user if not
             if (isValid && !simulator.data.generatedDescription) {
-                generateDescription();
+                showMessage('Clique em "Gerar Descrição" para criar seu texto personalizado', 'error');
+                isValid = false;
             }
         }
 
@@ -211,39 +215,66 @@
 
     // Generate Description from Template
     function generateDescription() {
-        if (!simulator.data.businessName || !simulator.data.category) return;
+        const businessName = $('#business_name').val().trim();
+        const category = $('#business_category').val();
+        const locality = $('#business_locality').val().trim();
+        const services = $('#business_services').val().trim();
+        const audience = $('#business_audience').val().trim();
+        const differential = $('#business_differential').val().trim();
+        
+        // Validate required fields
+        if (!businessName || !category) {
+            showMessage(futturuSimulator.strings.fillRequiredFields, 'error');
+            return;
+        }
+        
+        // Update simulator data
+        simulator.data.businessName = businessName;
+        simulator.data.category = category;
+        simulator.data.locality = locality;
+        simulator.data.services = services;
+        simulator.data.audience = audience;
+        simulator.data.differential = differential;
 
-        // Get templates from backend (would be passed via wp_localize_script in real implementation)
-        // For now, we'll use a simple template
-        const templates = [
-            'Transforme seu {categoria} em referência em {localidade}! O {nome} oferece {servicos} com o diferencial de {diferencial}. Perfeito para {publico} que busca qualidade e excelência.',
-            'Descubra o {nome}, o {categoria} ideal em {localidade}. Especializado em {servicos}, nosso maior diferencial é {diferencial}. Atendemos {publico} com dedicação total.',
-            '{nome}: Seu {categoria} de confiança em {localidade}. Oferecemos {servicos} com {diferencial}. A escolha certa para {publico} que valoriza qualidade.',
-            'Em {localidade}, o {nome} se destaca como {categoria}. Com {servicos} e {diferencial}, somos a solução perfeita para {publico}.',
-            'Conheça o {nome}, referência em {categoria} em {localidade}. Nossos serviços incluem {servicos}, com o diferencial de {diferencial}. Ideal para {publico}.',
-            'O {nome} é o {categoria} que {publico} de {localidade} estava esperando. Oferecemos {servicos} com {diferencial} para você.',
-            'Procurando um {categoria} em {localidade}? O {nome} tem {servicos} e o diferencial de {diferencial}. Feito para {publico} exigentes.',
-            '{nome}: Excelência em {categoria} em {localidade}. Contamos com {servicos} e {diferencial}. A melhor opção para {publico}.',
-            'Seu {categoria} em {localidade} com a qualidade do {nome}. Oferecemos {servicos}, tendo {diferencial} como nosso grande diferencial. Pensado para {publico}.',
-            'O {nome} chega em {localidade} como referência em {categoria}. Com {servicos} e {diferencial}, atendemos {publico} com maestria.'
+        // Get templates from backend (passed via wp_localize_script)
+        const templates = futturuSimulator.templates || [
+            'Transforme seu {categoria} em referência absoluta em {localidade}! O {nome} se destaca por oferecer {servicos}, sempre com o diferencial de {diferencial}. A escolha perfeita para {publico} que exige qualidade, confiança e excelência no atendimento.',
+            'Descubra o {nome}, o {categoria} que está revolucionando o mercado em {localidade}. Especializado em {servicos}, nosso maior orgulho é {diferencial}. Atendemos {publico} com dedicação, profissionalismo e resultados comprovados.',
+            '{nome}: Muito mais que um {categoria}, uma experiência completa em {localidade}. Oferecemos {servicos} com {diferencial}, garantindo a satisfação total de {publico} que busca o melhor custo-benefício da região.',
+            'Em {localidade}, o {nome} é sinônimo de confiança e qualidade como {categoria}. Com {servicos} e {diferencial}, somos a solução ideal para {publico} que valoriza atendimento personalizado e resultados excepcionais.',
+            'Conheça o {nome}, a nova referência em {categoria} em {localidade}. Nossos serviços incluem {servicos}, todos entregues com {diferencial}. A escolha certa para {publico} que não abre mão de excelência.',
+            'O {nome} é exatamente o {categoria} que {publico} de {localidade} estava procurando. Oferecemos {servicos} com {diferencial}, proporcionando uma experiência única e memorável para cada cliente.',
+            'Procurando um {categoria} de verdade em {localidade}? O {nome} entrega {servicos} com o incomparável {diferencial}. Desenvolvido especialmente para {publico} exigente que conhece qualidade quando vê.',
+            '{nome}: Excelência e tradição em {categoria} em {localidade}. Contamos com {servicos} e {diferencial} para superar as expectativas de {publico} mais criteriosos.',
+            'Seu {categoria} premium em {localidade} chegou: {nome}. Oferecemos {servicos}, tendo {diferencial} como nosso compromisso diário. Tudo pensado nos mínimos detalhes para {publico} que merece o melhor.',
+            'O {nome} estabelece novo padrão como {categoria} em {localidade}. Com {servicos} e {diferencial}, atendemos {publico} com maestria, transformando necessidades em soluções reais e duradouras.'
         ];
 
         // Select random template
         const templateIndex = Math.floor(Math.random() * templates.length);
         let template = templates[templateIndex];
 
-        // Replace placeholders
+        // Replace placeholders with actual values or smart defaults
         template = template.replace(/{nome}/g, simulator.data.businessName);
         template = template.replace(/{categoria}/g, simulator.data.category);
-        template = template.replace(/{localidade}/g, simulator.data.locality || '[sua localidade]');
-        template = template.replace(/{servicos}/g, simulator.data.services || '[seus serviços]');
-        template = template.replace(/{publico}/g, simulator.data.audience || '[seu público]');
-        template = template.replace(/{diferencial}/g, simulator.data.differential || '[seu diferencial]');
+        template = template.replace(/{localidade}/g, simulator.data.locality || 'sua região');
+        template = template.replace(/{servicos}/g, simulator.data.services || 'serviços especializados');
+        template = template.replace(/{publico}/g, simulator.data.audience || 'clientes exigentes');
+        template = template.replace(/{diferencial}/g, simulator.data.differential || 'qualidade incomparável');
 
         simulator.data.generatedDescription = template;
 
-        // Update UI
-        $descriptionText.html(`<p>${template}</p>`);
+        // Update UI with animation effect
+        $descriptionText.hide().html(`<p>${template}</p>`).fadeIn(300);
+        
+        // Visual feedback
+        const $btn = $('#btn-generate-description');
+        $btn.addClass('futturu-loading');
+        setTimeout(() => {
+            $btn.removeClass('futturu-loading');
+            showMessage(futturuSimulator.strings.descriptionGenerated, 'success');
+        }, 500);
+        
         updatePreview();
     }
 

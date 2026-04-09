@@ -258,6 +258,55 @@
     min-height: 60px;
 }
 
+.futturu-btn-generate {
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.futturu-btn-generate:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.futturu-btn-generate .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.futturu-btn-generate.futturu-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.futturu-btn-generate.futturu-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    animation: spin 0.6s linear infinite;
+}
+
 /* Website Preview Mockup */
 .futturu-preview-section {
     margin-bottom: 30px;

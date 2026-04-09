@@ -123,43 +123,43 @@ class Futturu_Website_Simulator {
         return array(
             array(
                 'id' => 1,
-                'template' => 'Transforme seu {categoria} em referência em {localidade}! O {nome} oferece {servicos} com o diferencial de {diferencial}. Perfeito para {publico} que busca qualidade e excelência.'
+                'template' => 'Transforme seu {categoria} em referência absoluta em {localidade}! O {nome} se destaca por oferecer {servicos}, sempre com o diferencial de {diferencial}. A escolha perfeita para {publico} que exige qualidade, confiança e excelência no atendimento.'
             ),
             array(
                 'id' => 2,
-                'template' => 'Descubra o {nome}, o {categoria} ideal em {localidade}. Especializado em {servicos}, nosso maior diferencial é {diferencial}. Atendemos {publico} com dedicação total.'
+                'template' => 'Descubra o {nome}, o {categoria} que está revolucionando o mercado em {localidade}. Especializado em {servicos}, nosso maior orgulho é {diferencial}. Atendemos {publico} com dedicação, profissionalismo e resultados comprovados.'
             ),
             array(
                 'id' => 3,
-                'template' => '{nome}: Seu {categoria} de confiança em {localidade}. Oferecemos {servicos} com {diferencial}. A escolha certa para {publico} que valoriza qualidade.'
+                'template' => '{nome}: Muito mais que um {categoria}, uma experiência completa em {localidade}. Oferecemos {servicos} com {diferencial}, garantindo a satisfação total de {publico} que busca o melhor custo-benefício da região.'
             ),
             array(
                 'id' => 4,
-                'template' => 'Em {localidade}, o {nome} se destaca como {categoria}. Com {servicos} e {diferencial}, somos a solução perfeita para {publico}.'
+                'template' => 'Em {localidade}, o {nome} é sinônimo de confiança e qualidade como {categoria}. Com {servicos} e {diferencial}, somos a solução ideal para {publico} que valoriza atendimento personalizado e resultados excepcionais.'
             ),
             array(
                 'id' => 5,
-                'template' => 'Conheça o {nome}, referência em {categoria} em {localidade}. Nossos serviços incluem {servicos}, com o diferencial de {diferencial}. Ideal para {publico}.'
+                'template' => 'Conheça o {nome}, a nova referência em {categoria} em {localidade}. Nossos serviços incluem {servicos}, todos entregues com {diferencial}. A escolha certa para {publico} que não abre mão de excelência.'
             ),
             array(
                 'id' => 6,
-                'template' => 'O {nome} é o {categoria} que {publico} de {localidade} estava esperando. Oferecemos {servicos} com {diferencial} para você.'
+                'template' => 'O {nome} é exatamente o {categoria} que {publico} de {localidade} estava procurando. Oferecemos {servicos} com {diferencial}, proporcionando uma experiência única e memorável para cada cliente.'
             ),
             array(
                 'id' => 7,
-                'template' => 'Procurando um {categoria} em {localidade}? O {nome} tem {servicos} e o diferencial de {diferencial}. Feito para {publico} exigentes.'
+                'template' => 'Procurando um {categoria} de verdade em {localidade}? O {nome} entrega {servicos} com o incomparável {diferencial}. Desenvolvido especialmente para {publico} exigente que conhece qualidade quando vê.'
             ),
             array(
                 'id' => 8,
-                'template' => '{nome}: Excelência em {categoria} em {localidade}. Contamos com {servicos} e {diferencial}. A melhor opção para {publico}.'
+                'template' => '{nome}: Excelência e tradição em {categoria} em {localidade}. Contamos com {servicos} e {diferencial} para superar as expectativas de {publico} mais criteriosos.'
             ),
             array(
                 'id' => 9,
-                'template' => 'Seu {categoria} em {localidade} com a qualidade do {nome}. Oferecemos {servicos}, tendo {diferencial} como nosso grande diferencial. Pensado para {publico}.'
+                'template' => 'Seu {categoria} premium em {localidade} chegou: {nome}. Oferecemos {servicos}, tendo {diferencial} como nosso compromisso diário. Tudo pensado nos mínimos detalhes para {publico} que merece o melhor.'
             ),
             array(
                 'id' => 10,
-                'template' => 'O {nome} chega em {localidade} como referência em {categoria}. Com {servicos} e {diferencial}, atendemos {publico} com maestria.'
+                'template' => 'O {nome} estabelece novo padrão como {categoria} em {localidade}. Com {servicos} e {diferencial}, atendemos {publico} com maestria, transformando necessidades em soluções reais e duradouras.'
             ),
         );
     }
@@ -360,6 +360,7 @@ class Futturu_Website_Simulator {
         wp_localize_script('futturu-simulator-js', 'futturuSimulator', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('futturu_simulator_nonce'),
+            'templates' => $options['futturu_templates'] ? array_column($options['futturu_templates'], 'template') : array(),
             'strings' => array(
                 'step1' => __('Escolha o Tipo de Site', 'futturu-website-simulator'),
                 'step2' => __('Informações do Negócio', 'futturu-website-simulator'),
@@ -374,6 +375,8 @@ class Futturu_Website_Simulator {
                 'required' => __('Este campo é obrigatório', 'futturu-website-simulator'),
                 'invalidEmail' => __('E-mail inválido', 'futturu-website-simulator'),
                 'invalidPhone' => __('Telefone inválido', 'futturu-website-simulator'),
+                'fillRequiredFields' => __('Preencha pelo menos Nome e Categoria para gerar a descrição', 'futturu-website-simulator'),
+                'descriptionGenerated' => __('Descrição gerada com sucesso!', 'futturu-website-simulator'),
             )
         ));
     }
@@ -499,13 +502,17 @@ class Futturu_Website_Simulator {
                     <div class="futturu-generated-description">
                         <h4><?php _e('Descrição Gerada Automaticamente', 'futturu-website-simulator'); ?></h4>
                         <div id="generated-description-text" class="description-content">
-                            <em><?php _e('Preencha os campos acima para gerar sua descrição...', 'futturu-website-simulator'); ?></em>
+                            <em><?php _e('Preencha os campos acima e clique em "Gerar Descrição" para criar seu texto...', 'futturu-website-simulator'); ?></em>
                         </div>
+                        <button type="button" id="btn-generate-description" class="futturu-btn-generate">
+                            <span class="dashicons dashicons-admin-media"></span>
+                            <?php _e('Gerar Descrição', 'futturu-website-simulator'); ?>
+                        </button>
                     </div>
                     
                     <!-- Website Preview Mockup -->
                     <div class="futturu-preview-section">
-                        <h4><?php _e('Prévia do Seu Hotsite', 'futturu-website-simulator'); ?></h4>
+                        <h4><?php _e('Prévia do Seu Website', 'futturu-website-simulator'); ?></h4>
                         <div id="website-preview" class="website-preview-mockup">
                             <div class="preview-browser-bar">
                                 <span class="browser-dot red"></span>
