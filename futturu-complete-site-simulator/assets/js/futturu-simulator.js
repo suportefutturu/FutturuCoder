@@ -260,9 +260,36 @@
             html += '<h4>📋 Projeto</h4>';
             html += '<ul>';
             html += `<li><strong>Tipo:</strong> ${data.project_type === 'novo' ? 'Site Novo' : 'Redesenho'}</li>`;
-            html += `<li><strong>Site:</strong> ${this.getSiteTypeLabel(data.site_type)}</li>`;
-            html += `<li><strong>Complexidade:</strong> ${this.getComplexityLabel(data.complexity_level)}</li>`;
-            html += `<li><strong>Páginas:</strong> ${this.getPagesLabel(data.num_pages)}</li>`;
+            
+            // Site type label mapping
+            const siteTypeLabels = {
+                'blog': 'Blog',
+                'news': 'Notícias',
+                'portfolio': 'Portfólio',
+                'hotsite': 'Hotsite',
+                'institutional': 'Institucional',
+                'ecommerce': 'E-commerce',
+                'other': data.site_type_other || 'Outro'
+            };
+            html += `<li><strong>Site:</strong> ${siteTypeLabels[data.site_type] || data.site_type}</li>`;
+            
+            // Complexity label mapping
+            const complexityLabels = {
+                'baixa': 'Baixa',
+                'media': 'Média',
+                'alta': 'Alta'
+            };
+            html += `<li><strong>Complexidade:</strong> ${complexityLabels[data.complexity_level] || data.complexity_level}</li>`;
+            
+            // Pages label mapping
+            const pagesLabels = {
+                'ate_6': 'Até 6 seções',
+                'ate_10': 'Até 10 seções',
+                'ate_20': 'Até 20 seções',
+                'ate_30': 'Até 30 seções',
+                'sob_medida': data.num_pages_custom || 'Sob Medida'
+            };
+            html += `<li><strong>Páginas:</strong> ${pagesLabels[data.num_pages] || data.num_pages}</li>`;
             html += '</ul>';
             html += '</div>';
 
@@ -285,9 +312,25 @@
             html += '<div class="summary-section">';
             html += '<h4>🖥️ Hospedagem e Manutenção</h4>';
             html += '<ul>';
-            html += `<li><strong>Domínio:</strong> ${data.domain_status === 'ja_registrado' ? 'Já registrado' : 'Preciso registrar'}</li>`;
-            html += `<li><strong>Hospedagem:</strong> ${this.getHostingLabel(data.hosting_current)}</li>`;
-            html += `<li><strong>Manutenção:</strong> ${data.maintenance_package === 'sim_quero_proposta' ? 'Quero proposta' : 'Farei eu mesmo'}</li>`;
+            const domainLabels = {
+                'ja_registrado': 'Já registrado',
+                'preciso_registrar': 'Preciso registrar'
+            };
+            html += `<li><strong>Domínio:</strong> ${domainLabels[data.domain_status] || data.domain_status}</li>`;
+            
+            const hostingLabels = {
+                'nao_tenho': 'Não tenho',
+                'compartilhada': 'Compartilhada',
+                'cloud_preciso_avaliar': 'Cloud (Preciso avaliar)',
+                'quero_migrar_cloud': 'Quero migrar para Cloud'
+            };
+            html += `<li><strong>Hospedagem:</strong> ${hostingLabels[data.hosting_current] || data.hosting_current}</li>`;
+            
+            const maintenanceLabels = {
+                'sim_quero_proposta': 'Quero proposta',
+                'nao_farei_mesmo': 'Farei eu mesmo'
+            };
+            html += `<li><strong>Manutenção:</strong> ${maintenanceLabels[data.maintenance_package] || data.maintenance_package}</li>`;
             html += '</ul>';
             html += '</div>';
 
