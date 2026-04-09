@@ -209,6 +209,13 @@
             // Debug log
             console.log('Form data being sent:', formData);
             
+            // Check if we have minimum required data
+            if (!formData || Object.keys(formData).length === 0) {
+                console.error('Nenhum dado no formulário');
+                $('#summaryContainer').html('<p>Erro: Nenhum dado encontrado. Por favor, preencha o formulário.</p>');
+                return;
+            }
+            
             $.ajax({
                 url: futturuSimulator.ajaxUrl,
                 type: 'POST',
@@ -218,6 +225,7 @@
                     ...formData
                 },
                 beforeSend: () => {
+                    console.log('Iniciando cálculo AJAX...');
                     $('#summaryContainer').html('<p>' + futturuSimulator.strings.calculating + '</p>');
                     $('#investmentValue').text('-');
                     $('#investmentRange').text('-');
@@ -225,15 +233,17 @@
                 },
                 success: (response) => {
                     console.log('AJAX Response:', response);
-                    if (response.success) {
+                    if (response.success && response.data && response.data.calculation) {
+                        console.log('Cálculo recebido:', response.data.calculation);
                         this.displaySummary(formData, response.data.calculation);
                     } else {
-                        console.error('Calculation error:', response.data);
+                        console.error('Calculation error:', response);
                         $('#summaryContainer').html('<p>Erro ao calcular. Tente novamente.</p>');
                     }
                 },
                 error: (xhr, status, error) => {
                     console.error('AJAX Error:', status, error);
+                    console.error('XHR details:', xhr);
                     $('#summaryContainer').html('<p>Erro ao calcular. Verifique sua conexão e tente novamente.</p>');
                 }
             });
@@ -318,12 +328,20 @@
             const data = {};
             const form = this.form[0];
             
-            // Get all form elements
+            if (!form) {
+                console.error('Formulário não encontrado');
+                return {};
+            }
+            
+            // Get all form elements using FormData
             const formData = new FormData(form);
             
             // Process FormData properly
             for (let [key, value] of formData.entries()) {
-                // Handle array fields (checkboxes)
+                // Skip empty values
+                if (!value || value.trim() === '') continue;
+                
+                // Handle array fields (checkboxes with [] suffix)
                 if (key.endsWith('[]')) {
                     const cleanKey = key.replace('[]', '');
                     if (!data[cleanKey]) {
@@ -347,10 +365,16 @@
                 if (checkboxes.length > 0) {
                     data[arrayName] = [];
                     checkboxes.forEach(cb => {
-                        data[arrayName].push(cb.value);
+                        if (!data[arrayName].includes(cb.value)) {
+                            data[arrayName].push(cb.value);
+                        }
                     });
                 }
             });
+            
+            // Ensure boolean fields are properly set
+            data['seo_basic'] = form.querySelector('input[name="seo_basic"]:checked') ? '1' : '0';
+            data['seo_advanced'] = form.querySelector('input[name="seo_advanced"]:checked') ? '1' : '0';
             
             // Debug log
             console.log('getFormData result:', data);
