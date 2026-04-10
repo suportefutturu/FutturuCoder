@@ -8,10 +8,10 @@ if (!defined('ABSPATH')) {
 
 $settings = get_option('fis_settings');
 $messages = isset($settings['messages']) ? $settings['messages'] : fis_get_default_messages();
-$business_types = FIS_Public::get_business_types();
-$revenue_ranges = FIS_Public::get_revenue_ranges();
-$target_audiences = FIS_Public::get_target_audiences();
-$objectives = FIS_Public::get_objectives();
+$business_types = fis_get_business_types();
+$revenue_ranges = fis_get_revenue_ranges();
+$target_audiences = fis_get_target_audiences();
+$objectives = fis_get_objectives();
 ?>
 
 <div id="fis-simulator" class="fis-simulator-container">

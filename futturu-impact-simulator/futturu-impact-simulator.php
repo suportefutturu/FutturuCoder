@@ -336,7 +336,65 @@ function fis_get_default_messages() {
         'cta_subtitle' => 'Converse com um especialista da Futturu e descubra como transformar essa projeção em realidade.',
         'contact_form_title' => 'Solicite uma Consultoria Gratuita',
         'success_message' => 'Obrigado! Entraremos em contato em breve.',
-        'error_message' => 'Ocorreu um erro. Por favor, tente novamente.'
+        'error_message' => 'Ocorreu um erro. Por favor, tente novamente.',
+        'disclaimer' => 'Esta projeção é baseada em benchmarks de negócios semelhantes e práticas recomendadas de presença digital.'
+    );
+}
+
+/**
+ * Get business types
+ */
+function fis_get_business_types() {
+    return array(
+        'restaurante' => __('Restaurante', 'futturu-impact-simulator'),
+        'cafe' => __('Café', 'futturu-impact-simulator'),
+        'floricultura' => __('Floricultura', 'futturu-impact-simulator'),
+        'advocacia' => __('Advocacia', 'futturu-impact-simulator'),
+        'clinica_medica' => __('Clínica Médica', 'futturu-impact-simulator'),
+        'consultoria' => __('Consultoria', 'futturu-impact-simulator'),
+        'escola' => __('Escola', 'futturu-impact-simulator'),
+        'oficina_mecanica' => __('Oficina Mecânica', 'futturu-impact-simulator'),
+        'aluguel_carros' => __('Aluguel de Carros', 'futturu-impact-simulator'),
+        'loja_roupas' => __('Loja de Roupas', 'futturu-impact-simulator'),
+        'ecommerce' => __('E-commerce', 'futturu-impact-simulator'),
+        'servico_profissional' => __('Serviço Profissional', 'futturu-impact-simulator'),
+        'outro' => __('Outro', 'futturu-impact-simulator')
+    );
+}
+
+/**
+ * Get revenue ranges
+ */
+function fis_get_revenue_ranges() {
+    return array(
+        'low' => __('Até R$ 10.000/mês', 'futturu-impact-simulator'),
+        'medium' => __('R$ 10.001 - R$ 25.000/mês', 'futturu-impact-simulator'),
+        'high' => __('R$ 25.001 - R$ 50.000/mês', 'futturu-impact-simulator'),
+        'very_high' => __('Acima de R$ 50.000/mês', 'futturu-impact-simulator')
+    );
+}
+
+/**
+ * Get target audiences
+ */
+function fis_get_target_audiences() {
+    return array(
+        'b2c' => __('Consumidores Finais (B2C)', 'futturu-impact-simulator'),
+        'b2b' => __('Empresas (B2B)', 'futturu-impact-simulator'),
+        'both' => __('Ambos', 'futturu-impact-simulator')
+    );
+}
+
+/**
+ * Get objectives
+ */
+function fis_get_objectives() {
+    return array(
+        'visibilidade' => __('Aumentar Visibilidade', 'futturu-impact-simulator'),
+        'vendas' => __('Gerar Mais Vendas', 'futturu-impact-simulator'),
+        'leads' => __('Captação de Leads', 'futturu-impact-simulator'),
+        'marca' => __('Fortalecer Marca', 'futturu-impact-simulator'),
+        'cartao_visitas' => __('Substituir Cartão de Visitas Físico', 'futturu-impact-simulator')
     );
 }
 
