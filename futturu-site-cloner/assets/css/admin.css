@@ -1,0 +1,349 @@
+/**
+ * Futturu Site Cloner - Admin Styles
+ */
+
+.fsc-wrap {
+    max-width: 1200px;
+}
+
+.fsc-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 1024px) {
+    .fsc-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.fsc-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.fsc-card h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    color: #23282d;
+}
+
+.fsc-form-group {
+    margin-bottom: 20px;
+}
+
+.fsc-form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #23282d;
+}
+
+.fsc-form-group .required {
+    color: #dc3232;
+}
+
+.fsc-form-group input[type="text"],
+.fsc-form-group input[type="url"],
+.fsc-form-group input[type="number"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.fsc-form-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.fsc-form-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.fsc-form-row .fsc-form-group {
+    flex: 1;
+    min-width: 150px;
+}
+
+.fsc-form-group .description {
+    font-style: italic;
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.fsc-advanced-options {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+.fsc-advanced-options .button-link {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 14px;
+    color: #2271b1;
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.fsc-advanced-options .button-link:hover {
+    color: #135e96;
+}
+
+.fsc-advanced-options .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+#fsc-advanced-panel {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.fsc-form-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.fsc-form-actions .button-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    height: auto;
+}
+
+.fsc-form-actions .button-primary .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Log Styles */
+.fsc-log {
+    background: #1e1e1e;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    padding: 15px;
+    border-radius: 4px;
+    height: 300px;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+.fsc-log p {
+    margin: 5px 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.fsc-log-info {
+    color: #4a9eff !important;
+}
+
+.fsc-log-success {
+    color: #00ff00 !important;
+}
+
+.fsc-log-error {
+    color: #ff4444 !important;
+}
+
+.fsc-log-warning {
+    color: #ffbb33 !important;
+}
+
+/* Progress Bar */
+.fsc-progress-container {
+    margin-top: 15px;
+}
+
+.fsc-progress-bar {
+    background: #e0e0e0;
+    border-radius: 4px;
+    height: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.fsc-progress-fill {
+    background: linear-gradient(90deg, #2271b1, #135e96);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+#fsc-status {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+}
+
+/* Status Badges */
+.fsc-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.fsc-status-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.fsc-status-error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.fsc-status-unknown {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+/* Table Styles */
+.fsc-card table {
+    margin-top: 15px;
+}
+
+.fsc-card table th {
+    font-weight: 600;
+    padding: 10px;
+}
+
+.fsc-card table td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.fsc-card table .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.fsc-card table .button .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Help Page */
+.fsc-code-block {
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 15px 0;
+    overflow-x: auto;
+}
+
+.fsc-code-block code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    color: #333;
+}
+
+.fsc-card h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #23282d;
+    font-size: 16px;
+}
+
+.fsc-card ol,
+.fsc-card ul {
+    margin-left: 20px;
+}
+
+.fsc-card li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.fsc-card li strong {
+    color: #2271b1;
+}
+
+.fsc-card a {
+    color: #2271b1;
+    text-decoration: none;
+}
+
+.fsc-card a:hover {
+    color: #135e96;
+    text-decoration: underline;
+}
+
+/* Loading State */
+.fsc-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.fsc-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #2271b1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .fsc-form-row {
+        flex-direction: column;
+    }
+    
+    .fsc-form-group input[type="text"],
+    .fsc-form-group input[type="url"],
+    .fsc-form-group input[type="number"] {
+        max-width: 100%;
+    }
+    
+    .fsc-card table {
+        font-size: 12px;
+    }
+    
+    .fsc-card table .button {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+}
