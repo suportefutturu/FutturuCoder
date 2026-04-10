@@ -193,7 +193,7 @@
     }
 
     /**
-     * Create comparison chart
+     * Create comparison chart with stacked bars for better visibility
      */
     function createChart(results) {
         const ctx = document.getElementById('fis-comparison-chart').getContext('2d');
@@ -201,15 +201,16 @@
 
         // Debug: Log results to console
         console.log('Chart Results:', results);
-        console.log('Current data:', [results.current.traffic, results.current.leads, results.current.conversions]);
-        console.log('Projected data:', [results.projected.traffic, results.projected.leads, results.projected.conversions]);
+        console.log('Current data - Traffic:', parseInt(results.current.traffic) || 0, 'Leads:', parseInt(results.current.leads) || 0, 'Conversions:', parseInt(results.current.conversions) || 0);
+        console.log('Projected data - Traffic:', parseInt(results.projected.traffic) || 0, 'Leads:', parseInt(results.projected.leads) || 0, 'Conversions:', parseInt(results.projected.conversions) || 0);
 
         // Destroy existing chart
         if (comparisonChart) {
             comparisonChart.destroy();
         }
 
-        // Create new chart with improved styling
+        // Prepare data for grouped bar chart (one group per metric)
+        // This shows each metric side by side for easy comparison
         comparisonChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -222,13 +223,13 @@
                             parseInt(results.current.leads) || 0,
                             parseInt(results.current.conversions) || 0
                         ],
-                        backgroundColor: 'rgba(148, 163, 184, 0.75)',
+                        backgroundColor: 'rgba(148, 163, 184, 0.9)',
                         borderColor: 'rgba(100, 116, 139, 1)',
                         borderWidth: 2,
-                        borderRadius: 10,
+                        borderRadius: 8,
                         borderSkipped: false,
-                        barPercentage: 0.7,
-                        categoryPercentage: 0.8
+                        barPercentage: 0.8,
+                        categoryPercentage: 0.9
                     },
                     {
                         label: messages.with_futturu,
@@ -237,13 +238,13 @@
                             parseInt(results.projected.leads) || 0,
                             parseInt(results.projected.conversions) || 0
                         ],
-                        backgroundColor: 'rgba(59, 130, 246, 0.85)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.9)',
                         borderColor: 'rgba(37, 99, 235, 1)',
                         borderWidth: 2,
-                        borderRadius: 10,
+                        borderRadius: 8,
                         borderSkipped: false,
-                        barPercentage: 0.7,
-                        categoryPercentage: 0.8
+                        barPercentage: 0.8,
+                        categoryPercentage: 0.9
                     }
                 ]
             },
@@ -255,33 +256,37 @@
                         position: 'top',
                         labels: {
                             font: {
-                                size: 13,
+                                size: 14,
                                 family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-                                weight: '500'
+                                weight: '600'
                             },
                             usePointStyle: true,
-                            padding: 25,
-                            color: '#374151'
+                            pointStyle: 'rect',
+                            padding: 20,
+                            color: '#1F2937'
                         }
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(17, 24, 39, 0.95)',
+                        backgroundColor: 'rgba(17, 24, 39, 0.98)',
                         titleFont: {
-                            size: 14,
+                            size: 15,
                             family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                             weight: '600'
                         },
                         bodyFont: {
-                            size: 13,
+                            size: 14,
                             family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
                         },
-                        padding: 15,
-                        cornerRadius: 10,
+                        padding: 16,
+                        cornerRadius: 12,
                         displayColors: true,
-                        boxPadding: 6,
+                        boxPadding: 8,
                         callbacks: {
                             label: function(context) {
                                 return context.dataset.label + ': ' + formatNumber(context.raw);
+                            },
+                            title: function(items) {
+                                return items[0].label;
                             }
                         }
                     }
@@ -290,8 +295,9 @@
                     y: {
                         beginAtZero: true,
                         grid: {
-                            color: 'rgba(209, 213, 219, 0.4)',
-                            lineWidth: 1
+                            color: 'rgba(209, 213, 219, 0.3)',
+                            lineWidth: 1,
+                            drawBorder: false
                         },
                         ticks: {
                             font: {
@@ -299,10 +305,11 @@
                                 family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
                             },
                             color: '#6B7280',
-                            padding: 10,
+                            padding: 12,
                             callback: function(value) {
                                 return formatNumber(value);
-                            }
+                            },
+                            maxTicksLimit: 6
                         },
                         border: {
                             display: false
@@ -310,16 +317,17 @@
                     },
                     x: {
                         grid: {
-                            display: false
+                            display: false,
+                            drawBorder: false
                         },
                         ticks: {
                             font: {
-                                size: 12,
+                                size: 13,
                                 family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-                                weight: '500'
+                                weight: '600'
                             },
                             color: '#374151',
-                            padding: 12
+                            padding: 16
                         },
                         border: {
                             display: false
@@ -327,10 +335,10 @@
                     }
                 },
                 animation: {
-                    duration: 1200,
+                    duration: 1400,
                     easing: 'easeOutQuart',
                     animateScale: true,
-                    animateRotate: true
+                    animateRotate: false
                 }
             }
         });
