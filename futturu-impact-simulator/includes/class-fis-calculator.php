@@ -27,17 +27,19 @@ class FIS_Calculator {
         // Get base traffic based on revenue range
         $base_traffic = self::get_base_traffic($revenue_range, $base_values);
         
-        // Calculate current situation (without professional website)
-        $current_traffic = $base_traffic;
-        $current_conversion_rate = $base_values['base_conversion_rate'];
+        // Calculate current situation (WITHOUT professional website - low baseline)
+        // Current traffic is only a fraction of potential (business relying on word-of-mouth, physical presence only)
+        $current_traffic = round($base_traffic * 0.15); // Only 15% of potential without professional site
+        $current_conversion_rate = $base_values['base_conversion_rate'] * 0.3; // Much lower conversion without optimization
         $current_leads = round($current_traffic * $current_conversion_rate);
-        $current_conversions = round($current_leads * 0.3); // 30% of leads convert
+        $current_conversions = round($current_leads * 0.2); // Only 20% of leads convert without proper follow-up
         
-        // Calculate projected situation (with Futturu website)
-        $projected_traffic = round($current_traffic * $coefficients['traffic_mult']);
-        $projected_conversion_rate = min(0.15, $current_conversion_rate * $coefficients['conversion_rate'] * 2); // Cap at 15%
+        // Calculate projected situation (WITH Futturu professional website)
+        // Full potential with SEO, optimized design, high performance hosting
+        $projected_traffic = round($base_traffic * $coefficients['traffic_mult']);
+        $projected_conversion_rate = min(0.12, $base_values['base_conversion_rate'] * $coefficients['conversion_rate']);
         $projected_leads = round($projected_traffic * $projected_conversion_rate * $coefficients['lead_mult']);
-        $projected_conversions = round($projected_leads * 0.4); // 40% conversion improvement
+        $projected_conversions = round($projected_leads * 0.45); // 45% conversion with proper nurturing
         
         // Calculate average ticket based on revenue range
         $avg_ticket = self::get_avg_ticket($revenue_range, $base_values);
