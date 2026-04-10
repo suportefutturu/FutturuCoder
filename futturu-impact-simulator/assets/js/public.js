@@ -199,6 +199,11 @@
         const ctx = document.getElementById('fis-comparison-chart').getContext('2d');
         const messages = fisData.settings.messages;
 
+        // Debug: Log results to console
+        console.log('Chart Results:', results);
+        console.log('Current data:', [results.current.traffic, results.current.leads, results.current.conversions]);
+        console.log('Projected data:', [results.projected.traffic, results.projected.leads, results.projected.conversions]);
+
         // Destroy existing chart
         if (comparisonChart) {
             comparisonChart.destroy();
@@ -212,7 +217,11 @@
                 datasets: [
                     {
                         label: messages.current_situation,
-                        data: [results.current.traffic, results.current.leads, results.current.conversions],
+                        data: [
+                            parseInt(results.current.traffic) || 0,
+                            parseInt(results.current.leads) || 0,
+                            parseInt(results.current.conversions) || 0
+                        ],
                         backgroundColor: 'rgba(148, 163, 184, 0.75)',
                         borderColor: 'rgba(100, 116, 139, 1)',
                         borderWidth: 2,
@@ -223,7 +232,11 @@
                     },
                     {
                         label: messages.with_futturu,
-                        data: [results.projected.traffic, results.projected.leads, results.projected.conversions],
+                        data: [
+                            parseInt(results.projected.traffic) || 0,
+                            parseInt(results.projected.leads) || 0,
+                            parseInt(results.projected.conversions) || 0
+                        ],
                         backgroundColor: 'rgba(59, 130, 246, 0.85)',
                         borderColor: 'rgba(37, 99, 235, 1)',
                         borderWidth: 2,

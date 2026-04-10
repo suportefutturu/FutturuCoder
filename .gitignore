@@ -1,49 +1,49 @@
-```css
-# Compiled and build artifacts
-*.pyc
-__pycache__/
-*.o
-*.obj
-*.class
-*.exe
-*.dll
-*.so
-*.a
-*.out
-
+```
 # Dependencies
 node_modules/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
 venv/
 .venv/
 .env
 .env.local
 .env.*
-
-# Build directories
-dist/
-build/
-target/
+.mypy_cache/
+.pytest_cache/
+.coverage
 coverage/
 htmlcov/
-*.log
 
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-*.tmp
+# Build outputs
+dist/
+build/
+*.egg-info/
+.tox/
 
-# System files
+# OS generated files
 .DS_Store
 Thumbs.db
 
-# Cache directories
-.mypy_cache/
-.pytest_cache/
-.gradle/
-
-# Compressed files
+# Compression
 *.zip
 *.gz
 *.tar
