@@ -201,8 +201,8 @@
 
         // Debug: Log results to console
         console.log('Chart Results:', results);
-        console.log('Current data - Traffic:', parseInt(results.current.traffic) || 0, 'Leads:', parseInt(results.current.leads) || 0, 'Conversions:', parseInt(results.current.conversions) || 0);
-        console.log('Projected data - Traffic:', parseInt(results.projected.traffic) || 0, 'Leads:', parseInt(results.projected.leads) || 0, 'Conversions:', parseInt(results.projected.conversions) || 0);
+        console.log('Current data - Leads:', parseInt(results.current.leads) || 0, 'Conversions:', parseInt(results.current.conversions) || 0);
+        console.log('Projected data - Leads:', parseInt(results.projected.leads) || 0, 'Conversions:', parseInt(results.projected.conversions) || 0);
 
         // Destroy existing chart
         if (comparisonChart) {
@@ -214,12 +214,11 @@
         comparisonChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [messages.visits_label, messages.leads_label, messages.conversions_label],
+                labels: [messages.leads_label, messages.conversions_label],
                 datasets: [
                     {
                         label: messages.current_situation,
                         data: [
-                            parseInt(results.current.traffic) || 0,
                             parseInt(results.current.leads) || 0,
                             parseInt(results.current.conversions) || 0
                         ],
@@ -234,7 +233,6 @@
                     {
                         label: messages.with_futturu,
                         data: [
-                            parseInt(results.projected.traffic) || 0,
                             parseInt(results.projected.leads) || 0,
                             parseInt(results.projected.conversions) || 0
                         ],
