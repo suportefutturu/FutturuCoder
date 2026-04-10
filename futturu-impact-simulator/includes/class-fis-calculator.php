@@ -27,19 +27,24 @@ class FIS_Calculator {
         // Get base traffic based on revenue range
         $base_traffic = self::get_base_traffic($revenue_range, $base_values);
         
-        // Calculate current situation (WITHOUT professional website - low baseline)
-        // Current traffic is only a fraction of potential (business relying on word-of-mouth, physical presence only)
-        $current_traffic = round($base_traffic * 0.15); // Only 15% of potential without professional site
-        $current_conversion_rate = $base_values['base_conversion_rate'] * 0.3; // Much lower conversion without optimization
-        $current_leads = round($current_traffic * $current_conversion_rate);
-        $current_conversions = round($current_leads * 0.2); // Only 20% of leads convert without proper follow-up
+        // Calculate current situation (WITHOUT professional website - realistic baseline)
+        // Current traffic is a fraction of potential (business relying on word-of-mouth, physical presence only)
+        $current_traffic = round($base_traffic * 0.25); // 25% of potential without professional site
+        $current_conversion_rate = $base_values['base_conversion_rate'] * 0.4; // Lower conversion without optimization
+        $current_leads = max(10, round($current_traffic * $current_conversion_rate)); // Minimum 10 leads
+        $current_conversions = max(2, round($current_leads * 0.25)); // At least 2 conversions
         
         // Calculate projected situation (WITH Futturu professional website)
         // Full potential with SEO, optimized design, high performance hosting
         $projected_traffic = round($base_traffic * $coefficients['traffic_mult']);
-        $projected_conversion_rate = min(0.12, $base_values['base_conversion_rate'] * $coefficients['conversion_rate']);
+        $projected_conversion_rate = min(0.15, $base_values['base_conversion_rate'] * $coefficients['conversion_rate']);
         $projected_leads = round($projected_traffic * $projected_conversion_rate * $coefficients['lead_mult']);
-        $projected_conversions = round($projected_leads * 0.45); // 45% conversion with proper nurturing
+        $projected_conversions = round($projected_leads * 0.50); // 50% conversion with proper nurturing
+        
+        // Ensure projected values are always higher than current
+        $projected_traffic = max($projected_traffic, $current_traffic + 100);
+        $projected_leads = max($projected_leads, $current_leads + 5);
+        $projected_conversions = max($projected_conversions, $current_conversions + 2);
         
         // Calculate average ticket based on revenue range
         $avg_ticket = self::get_avg_ticket($revenue_range, $base_values);

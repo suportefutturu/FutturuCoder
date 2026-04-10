@@ -204,7 +204,7 @@
             comparisonChart.destroy();
         }
 
-        // Create new chart
+        // Create new chart with improved styling
         comparisonChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -213,18 +213,24 @@
                     {
                         label: messages.current_situation,
                         data: [results.current.traffic, results.current.leads, results.current.conversions],
-                        backgroundColor: 'rgba(100, 116, 139, 0.7)',
+                        backgroundColor: 'rgba(148, 163, 184, 0.75)',
                         borderColor: 'rgba(100, 116, 139, 1)',
                         borderWidth: 2,
-                        borderRadius: 8
+                        borderRadius: 10,
+                        borderSkipped: false,
+                        barPercentage: 0.7,
+                        categoryPercentage: 0.8
                     },
                     {
                         label: messages.with_futturu,
                         data: [results.projected.traffic, results.projected.leads, results.projected.conversions],
-                        backgroundColor: 'rgba(37, 99, 235, 0.8)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.85)',
                         borderColor: 'rgba(37, 99, 235, 1)',
                         borderWidth: 2,
-                        borderRadius: 8
+                        borderRadius: 10,
+                        borderSkipped: false,
+                        barPercentage: 0.7,
+                        categoryPercentage: 0.8
                     }
                 ]
             },
@@ -236,25 +242,30 @@
                         position: 'top',
                         labels: {
                             font: {
-                                size: 12,
-                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+                                size: 13,
+                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                                weight: '500'
                             },
                             usePointStyle: true,
-                            padding: 20
+                            padding: 25,
+                            color: '#374151'
                         }
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(30, 41, 59, 0.9)',
+                        backgroundColor: 'rgba(17, 24, 39, 0.95)',
                         titleFont: {
+                            size: 14,
+                            family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                            weight: '600'
+                        },
+                        bodyFont: {
                             size: 13,
                             family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
                         },
-                        bodyFont: {
-                            size: 12,
-                            family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                        },
-                        padding: 12,
-                        cornerRadius: 8,
+                        padding: 15,
+                        cornerRadius: 10,
+                        displayColors: true,
+                        boxPadding: 6,
                         callbacks: {
                             label: function(context) {
                                 return context.dataset.label + ': ' + formatNumber(context.raw);
@@ -266,16 +277,22 @@
                     y: {
                         beginAtZero: true,
                         grid: {
-                            color: 'rgba(226, 232, 240, 0.5)'
+                            color: 'rgba(209, 213, 219, 0.4)',
+                            lineWidth: 1
                         },
                         ticks: {
                             font: {
-                                size: 11,
+                                size: 12,
                                 family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
                             },
+                            color: '#6B7280',
+                            padding: 10,
                             callback: function(value) {
                                 return formatNumber(value);
                             }
+                        },
+                        border: {
+                            display: false
                         }
                     },
                     x: {
@@ -284,15 +301,23 @@
                         },
                         ticks: {
                             font: {
-                                size: 11,
-                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                            }
+                                size: 12,
+                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                                weight: '500'
+                            },
+                            color: '#374151',
+                            padding: 12
+                        },
+                        border: {
+                            display: false
                         }
                     }
                 },
                 animation: {
-                    duration: 1000,
-                    easing: 'easeOutQuart'
+                    duration: 1200,
+                    easing: 'easeOutQuart',
+                    animateScale: true,
+                    animateRotate: true
                 }
             }
         });

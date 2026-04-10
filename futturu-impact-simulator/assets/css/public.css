@@ -370,15 +370,17 @@
 /* Charts */
 .fis-charts-container {
     margin: 2rem 0;
-    padding: 1.5rem;
-    background: var(--fis-white);
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--fis-white) 0%, #f8fafc 100%);
     border-radius: var(--fis-radius);
-    box-shadow: var(--fis-shadow);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .fis-chart-wrapper {
     position: relative;
-    height: 300px;
+    height: 350px;
+    max-width: 100%;
 }
 
 /* Highlights */

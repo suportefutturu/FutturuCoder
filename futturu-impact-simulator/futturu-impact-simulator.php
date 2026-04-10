@@ -303,14 +303,14 @@ function fis_get_default_benchmarks() {
  */
 function fis_get_default_base_values() {
     return array(
-        'base_traffic' => 500,
-        'base_conversion_rate' => 0.02,
-        'avg_ticket_low' => 50,
-        'avg_ticket_medium' => 150,
-        'avg_ticket_high' => 500,
-        'seo_improvement_factor' => 2.5,
-        'design_improvement_factor' => 1.8,
-        'hosting_performance_factor' => 1.3
+        'base_traffic' => 2000,
+        'base_conversion_rate' => 0.03,
+        'avg_ticket_low' => 80,
+        'avg_ticket_medium' => 250,
+        'avg_ticket_high' => 800,
+        'seo_improvement_factor' => 3.0,
+        'design_improvement_factor' => 2.0,
+        'hosting_performance_factor' => 1.5
     );
 }
 
