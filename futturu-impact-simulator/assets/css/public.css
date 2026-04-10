@@ -1,0 +1,642 @@
+/**
+ * Public CSS for Futturu Impact Simulator
+ */
+
+/* Variables */
+:root {
+    --fis-primary: #2563eb;
+    --fis-primary-dark: #1d4ed8;
+    --fis-secondary: #64748b;
+    --fis-success: #10b981;
+    --fis-warning: #f59e0b;
+    --fis-danger: #ef4444;
+    --fis-bg-light: #f8fafc;
+    --fis-border: #e2e8f0;
+    --fis-text-dark: #1e293b;
+    --fis-text-light: #64748b;
+    --fis-white: #ffffff;
+    --fis-radius: 12px;
+    --fis-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --fis-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Container */
+.fis-simulator-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--fis-white);
+    border-radius: var(--fis-radius);
+    box-shadow: var(--fis-shadow-lg);
+}
+
+/* Header */
+.fis-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.fis-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--fis-text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.fis-subtitle {
+    font-size: 1.125rem;
+    color: var(--fis-text-light);
+}
+
+/* Steps */
+.fis-step {
+    display: none;
+    animation: fisFadeIn 0.3s ease-in-out;
+}
+
+.fis-step.active {
+    display: block;
+}
+
+@keyframes fisFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fis-step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.fis-step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--fis-primary);
+    color: var(--fis-white);
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.fis-step-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--fis-text-dark);
+    margin: 0;
+}
+
+/* Form */
+.fis-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.fis-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.fis-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--fis-text-dark);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.fis-icon {
+    font-size: 1.125rem;
+}
+
+.fis-select,
+.fis-input,
+.fis-textarea {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--fis-border);
+    border-radius: var(--fis-radius);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background: var(--fis-white);
+    color: var(--fis-text-dark);
+}
+
+.fis-select:focus,
+.fis-input:focus,
+.fis-textarea:focus {
+    outline: none;
+    border-color: var(--fis-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.fis-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Buttons */
+.fis-form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.fis-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: var(--fis-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.fis-btn-primary {
+    background: var(--fis-primary);
+    color: var(--fis-white);
+}
+
+.fis-btn-primary:hover {
+    background: var(--fis-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--fis-shadow);
+}
+
+.fis-btn-secondary {
+    background: var(--fis-bg-light);
+    color: var(--fis-text-dark);
+    border: 2px solid var(--fis-border);
+}
+
+.fis-btn-secondary:hover {
+    background: var(--fis-border);
+}
+
+.fis-btn-cta {
+    background: linear-gradient(135deg, var(--fis-success), #059669);
+    color: var(--fis-white);
+    font-size: 1.125rem;
+    padding: 1rem 2.5rem;
+}
+
+.fis-btn-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+.fis-btn-full {
+    width: 100%;
+}
+
+.fis-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Spinner */
+.fis-spinner {
+    animation: fisSpin 1s linear infinite;
+}
+
+@keyframes fisSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading */
+.fis-loading {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.fis-loading-animation {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.fis-pulse {
+    width: 80px;
+    height: 80px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 50%;
+    animation: fisPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes fisPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.5;
+    }
+}
+
+.fis-chart-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+}
+
+.fis-loading h3 {
+    font-size: 1.5rem;
+    color: var(--fis-text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.fis-loading p {
+    color: var(--fis-text-light);
+}
+
+/* Comparison Panels */
+.fis-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.fis-panel {
+    background: var(--fis-bg-light);
+    border-radius: var(--fis-radius);
+    padding: 1.5rem;
+    position: relative;
+    border: 2px solid var(--fis-border);
+}
+
+.fis-panel-projected {
+    border-color: var(--fis-primary);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(37, 99, 235, 0.1));
+}
+
+.fis-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--fis-border);
+}
+
+.fis-panel-icon {
+    font-size: 1.5rem;
+}
+
+.fis-panel-header h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--fis-text-dark);
+    margin: 0;
+}
+
+.fis-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--fis-primary);
+    color: var(--fis-white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Metrics */
+.fis-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.fis-metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--fis-white);
+    border-radius: 8px;
+    box-shadow: var(--fis-shadow);
+}
+
+.fis-metric-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--fis-text-light);
+}
+
+.fis-metric-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--fis-text-dark);
+}
+
+.fis-metric-value.highlight {
+    color: var(--fis-primary);
+    font-size: 1.5rem;
+}
+
+/* Charts */
+.fis-charts-container {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--fis-white);
+    border-radius: var(--fis-radius);
+    box-shadow: var(--fis-shadow);
+}
+
+.fis-chart-wrapper {
+    position: relative;
+    height: 300px;
+}
+
+/* Highlights */
+.fis-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.fis-highlight {
+    background: linear-gradient(135deg, var(--fis-success), #059669);
+    color: var(--fis-white);
+    padding: 1.5rem;
+    border-radius: var(--fis-radius);
+    text-align: center;
+    box-shadow: var(--fis-shadow);
+}
+
+.fis-highlight-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.fis-highlight-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.fis-highlight-label {
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+/* Justifications */
+.fis-justifications {
+    background: var(--fis-bg-light);
+    border-radius: var(--fis-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.fis-justification-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--fis-white);
+    border-radius: 8px;
+    border-left: 4px solid var(--fis-primary);
+}
+
+.fis-justification-item:last-child {
+    margin-bottom: 0;
+}
+
+.fis-justification-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.fis-justification-text {
+    font-size: 0.95rem;
+    color: var(--fis-text-light);
+    line-height: 1.6;
+}
+
+/* Disclaimer */
+.fis-disclaimer {
+    text-align: center;
+    padding: 1rem;
+    margin: 2rem 0;
+    color: var(--fis-text-light);
+    font-size: 0.875rem;
+    border-top: 1px solid var(--fis-border);
+}
+
+/* CTA Section */
+.fis-cta-section {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+    border-radius: var(--fis-radius);
+    margin: 2rem 0;
+}
+
+.fis-cta-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--fis-text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.fis-cta-subtitle {
+    color: var(--fis-text-light);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+/* Modal */
+.fis-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+.fis-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fis-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.fis-modal-content {
+    position: relative;
+    background: var(--fis-white);
+    border-radius: var(--fis-radius);
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--fis-shadow-lg);
+    animation: fisModalIn 0.3s ease-out;
+}
+
+@keyframes fisModalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.fis-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--fis-text-light);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.fis-modal-close:hover {
+    background: var(--fis-bg-light);
+    color: var(--fis-text-dark);
+}
+
+.fis-modal-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.fis-modal-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--fis-text-dark);
+    margin: 0;
+}
+
+/* Success Message */
+.fis-success-message {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.fis-success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: var(--fis-success);
+    color: var(--fis-white);
+    border-radius: 50%;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.fis-success-message p {
+    font-size: 1.125rem;
+    color: var(--fis-text-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .fis-simulator-container {
+        padding: 1.5rem;
+    }
+
+    .fis-title {
+        font-size: 1.5rem;
+    }
+
+    .fis-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fis-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .fis-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .fis-chart-wrapper {
+        height: 250px;
+    }
+
+    .fis-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .fis-cta-section {
+        padding: 1.5rem;
+    }
+
+    .fis-cta-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .fis-form-actions,
+    .fis-cta-section,
+    .fis-modal {
+        display: none !important;
+    }
+}

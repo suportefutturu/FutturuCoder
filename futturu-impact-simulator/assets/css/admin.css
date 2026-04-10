@@ -1,0 +1,81 @@
+/**
+ * Admin CSS for Futturu Impact Simulator
+ */
+
+.fis-settings-wrap {
+    max-width: 800px;
+}
+
+.fis-settings-section {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.fis-settings-section h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.fis-settings-field {
+    margin-bottom: 20px;
+}
+
+.fis-settings-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.fis-settings-field input[type="text"],
+.fis-settings-field input[type="email"],
+.fis-settings-field textarea,
+.fis-settings-field select {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.fis-settings-field textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.fis-settings-field .description {
+    margin-top: 5px;
+    color: #666;
+    font-style: italic;
+}
+
+.fis-settings-field code {
+    background: #f0f0f1;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+/* Checkbox styling */
+.fis-settings-field input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Submit button */
+.fis-settings-wrap .submit {
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .fis-settings-field input[type="text"],
+    .fis-settings-field input[type="email"],
+    .fis-settings-field textarea,
+    .fis-settings-field select {
+        max-width: 100%;
+    }
+}
