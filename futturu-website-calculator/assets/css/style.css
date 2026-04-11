@@ -1,0 +1,395 @@
+/**
+ * Futturu Website Calculator - Styles
+ * Version: 2.0.0
+ */
+
+.futturu-calculator-wrapper {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--futturu-background, #ffffff);
+    border-radius: var(--futturu-radius, 8px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    font-family: var(--futturu-font, 'Inter', system-ui, -apple-system, sans-serif);
+    color: var(--futturu-text, #1f2937);
+    line-height: 1.6;
+}
+
+.futturu-calculator-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.futturu-calculator-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--futturu-primary, #2563eb);
+}
+
+.futturu-calculator-header p {
+    font-size: 16px;
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.futturu-form-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: var(--futturu-radius, 8px);
+}
+
+.futturu-form-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--futturu-primary, #2563eb);
+}
+
+.futturu-description {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 15px;
+}
+
+.futturu-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 2px solid #e5e7eb;
+    border-radius: var(--futturu-radius, 8px);
+    background-color: #ffffff;
+    color: var(--futturu-text, #1f2937);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.futturu-input:focus {
+    outline: none;
+    border-color: var(--futturu-primary, #2563eb);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.futturu-input:hover {
+    border-color: #d1d5db;
+}
+
+.futturu-checkboxes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.futturu-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 15px;
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: var(--futturu-radius, 8px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.futturu-checkbox-label:hover {
+    border-color: var(--futturu-primary, #2563eb);
+    background: rgba(37, 99, 235, 0.03);
+}
+
+.futturu-checkbox-label input[type="checkbox"] {
+    margin-right: 12px;
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--futturu-primary, #2563eb);
+}
+
+.futturu-checkbox-text {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--futturu-text, #1f2937);
+}
+
+.futturu-checkbox-price {
+    display: block;
+    font-size: 13px;
+    color: var(--futturu-accent, #10b981);
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.futturu-result-section {
+    margin: 40px 0;
+}
+
+.futturu-result-box {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+    padding: 30px;
+    border-radius: var(--futturu-radius, 8px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.futturu-result-box h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--futturu-text, #1f2937);
+}
+
+.futturu-result-value {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--futturu-primary, #2563eb);
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.futturu-currency {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--futturu-text, #1f2937);
+}
+
+.futturu-result-breakdown {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: var(--futturu-radius, 8px);
+    margin-top: 20px;
+    text-align: left;
+}
+
+.futturu-result-breakdown p {
+    margin: 10px 0;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #e5e7eb;
+}
+
+.futturu-result-breakdown p:last-child {
+    border-bottom: none;
+}
+
+.futturu-disclaimer {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.futturu-contact-section {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.futturu-contact-section h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--futturu-primary, #2563eb);
+    text-align: center;
+}
+
+.futturu-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+    .futturu-form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.futturu-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.futturu-form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--futturu-text, #1f2937);
+}
+
+.futturu-form-group textarea.futturu-input {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#futturu-message-container {
+    margin: 20px 0;
+}
+
+.futturu-message {
+    padding: 15px 20px;
+    border-radius: var(--futturu-radius, 8px);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.futturu-message.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.futturu-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.futturu-btn-primary {
+    width: 100%;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid var(--futturu-primary, #2563eb);
+    border-radius: var(--futturu-radius, 8px);
+    background-color: var(--futturu-primary, #2563eb);
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.futturu-btn-primary:hover {
+    background-color: var(--futturu-secondary, #1e40af);
+    border-color: var(--futturu-secondary, #1e40af);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.futturu-btn-primary:active {
+    transform: translateY(0);
+}
+
+.futturu-btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.futturu-btn-primary .btn-loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: futturu-spin 0.8s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes futturu-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Outline button style */
+.futturu-calculator-wrapper.button-outline .futturu-btn-primary {
+    background-color: transparent;
+    color: var(--futturu-primary, #2563eb);
+}
+
+.futturu-calculator-wrapper.button-outline .futturu-btn-primary:hover {
+    background-color: var(--futturu-primary, #2563eb);
+    color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .futturu-calculator-wrapper {
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .futturu-calculator-header h2 {
+        font-size: 24px;
+    }
+    
+    .futturu-result-value {
+        font-size: 36px;
+    }
+    
+    .futturu-currency {
+        font-size: 24px;
+    }
+    
+    .futturu-checkboxes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print styles */
+@media print {
+    .futturu-calculator-wrapper {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .futturu-btn-primary {
+        display: none;
+    }
+}
+
+/* Accessibility */
+.futturu-input:focus-visible,
+.futturu-checkbox-label:focus-within,
+.futturu-btn-primary:focus-visible {
+    outline: 3px solid var(--futturu-accent, #10b981);
+    outline-offset: 2px;
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+    .futturu-calculator-wrapper.dark-mode {
+        --futturu-background: #1f2937;
+        --futturu-text: #f9fafb;
+    }
+    
+    .futturu-calculator-wrapper.dark-mode .futturu-form-section {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .futturu-calculator-wrapper.dark-mode .futturu-input {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+    
+    .futturu-calculator-wrapper.dark-mode .futturu-checkbox-label {
+        background: #374151;
+        border-color: #4b5563;
+    }
+    
+    .futturu-calculator-wrapper.dark-mode .futturu-result-breakdown {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
