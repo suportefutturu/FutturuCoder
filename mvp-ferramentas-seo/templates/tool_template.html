@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tool.name }} | Ferramenta Online Grátis{% endblock %}
+
+{% block meta_description %}{{ tool.description }} Use grátis, sem cadastro. Resultados instantâneos.{% endblock %}
+
+{% block og_title %}{{ tool.name }} - Grátis e Online{% endblock %}
+
+{% block og_description %}{{ tool.description }} Acesse agora e use gratuitamente!{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Início</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ tool.name }}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Main Tool Area -->
+    <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-4">
+                    <span class="fs-1 me-3">{{ tool.icon }}</span>
+                    <div>
+                        <h1 class="h2 mb-0">{{ tool.name }}</h1>
+                        <p class="text-muted small mb-0">{{ tool.description }}</p>
+                    </div>
+                </div>
+
+                <!-- Ad Space In-Content Top -->
+                <div id="div-gpt-ad-in-content-top" class="ad-banner text-center bg-light border rounded p-3 mb-4">
+                    <!-- Google AdSense - Substitua pelo seu código -->
+                    <small class="text-muted">Espaço para Anúncio (In-Content - Responsivo)</small>
+                </div>
+
+                <!-- Tool Input Form -->
+                <form id="tool-form" method="POST" action="/{{ tool.slug }}">
+                    {% if tool.input_type == 'textarea' %}
+                    <div class="mb-3">
+                        <label for="input-text" class="form-label">Digite ou cole seu texto:</label>
+                        <textarea class="form-control" id="input-text" name="text" rows="6" placeholder="Cole seu texto aqui..."></textarea>
+                    </div>
+                    {% elif tool.input_type == 'text' %}
+                    <div class="mb-3">
+                        <label for="input-text" class="form-label">Digite:</label>
+                        <input type="text" class="form-control" id="input-text" name="text" placeholder="Digite aqui...">
+                    </div>
+                    {% elif tool.input_type == 'range' %}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="min-val" class="form-label">Valor Mínimo:</label>
+                            <input type="number" class="form-control" id="min-val" name="min_val" value="1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="max-val" class="form-label">Valor Máximo:</label>
+                            <input type="number" class="form-control" id="max-val" name="max_val" value="100">
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Additional Options for Some Tools -->
+                    {% if tool.slug == 'ordenar-lista' %}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="order" class="form-label">Ordem:</label>
+                            <select class="form-select" id="order" name="order">
+                                <option value="asc">Crescente (A-Z)</option>
+                                <option value="desc">Decrescente (Z-A)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sort-type" class="form-label">Tipo:</label>
+                            <select class="form-select" id="sort-type" name="sort_type">
+                                <option value="alpha">Alfabética</option>
+                                <option value="numeric">Numérica</option>
+                            </select>
+                        </div>
+                    </div>
+                    {% elif tool.slug == 'conversor-maiusculas-minusculas' %}
+                    <div class="mb-3">
+                        <label class="form-label">Tipo de Conversão:</label>
+                        <div class="btn-group w-100" role="group">
+                            <input type="radio" class="btn-check" name="case_type" id="upper" value="upper" checked>
+                            <label class="btn btn-outline-primary" for="upper">MAIÚSCULO</label>
+                            
+                            <input type="radio" class="btn-check" name="case_type" id="lower" value="lower">
+                            <label class="btn btn-outline-primary" for="lower">minúsculo</label>
+                            
+                            <input type="radio" class="btn-check" name="case_type" id="title" value="title">
+                            <label class="btn btn-outline-primary" for="title">Primeira Letra Maiúscula</label>
+                            
+                            <input type="radio" class="btn-check" name="case_type" id="sentence" value="sentence">
+                            <label class="btn btn-outline-primary" for="sentence">Frases</label>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button type="submit" class="btn btn-primary btn-lg">{{ tool.button_text }}</button>
+                        <button type="button" class="btn btn-outline-secondary" id="btn-clear">Limpar</button>
+                    </div>
+                </form>
+
+                <!-- Result Area -->
+                {% if result is not none %}
+                <div class="mt-4 p-4 bg-light rounded border">
+                    <h3 class="h5 mb-3">Resultado:</h3>
+                    
+                    {% if tool.slug == 'contador-de-palavras' %}
+                    <div class="row text-center">
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="display-6 fw-bold text-primary">{{ result.words }}</div>
+                            <small class="text-muted">Palavras</small>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="display-6 fw-bold text-success">{{ result.characters }}</div>
+                            <small class="text-muted">Caracteres</small>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="display-6 fw-bold text-info">{{ result.characters_no_spaces }}</div>
+                            <small class="text-muted">Sem Espaços</small>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="display-6 fw-bold text-warning">{{ result.lines }}</div>
+                            <small class="text-muted">Linhas</small>
+                        </div>
+                    </div>
+                    {% if result.paragraphs > 0 %}
+                    <div class="text-center mt-2">
+                        <span class="badge bg-secondary">{{ result.paragraphs }} parágrafos</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% elif tool.slug == 'gerador-numeros-aleatorios' %}
+                    <div class="text-center py-4">
+                        <div class="display-1 fw-bold text-primary mb-3">{{ result }}</div>
+                        <p class="text-muted">Número sorteado entre {{ request.form.get('min_val', 1) }} e {{ request.form.get('max_val', 100) }}</p>
+                    </div>
+                    
+                    {% elif tool.slug == 'verificador-palindromo' %}
+                    <div class="text-center py-3">
+                        {% if result %}
+                        <div class="alert alert-success d-inline-block">
+                            <strong>✓ SIM</strong>, é um palíndromo!
+                        </div>
+                        {% else %}
+                        <div class="alert alert-danger d-inline-block">
+                            <strong>✗ NÃO</strong>, não é um palíndromo.
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% elif tool.slug == 'gerador-qr-code' %}
+                    <div class="text-center">
+                        <img src="{{ result }}" alt="QR Code Gerado" class="img-fluid border rounded mb-3" style="max-width: 300px;">
+                        <br>
+                        <a href="{{ result }}" download="qrcode.png" class="btn btn-success btn-sm">
+                            ⬇️ Download QR Code
+                        </a>
+                    </div>
+                    
+                    {% elif tool.slug == 'contador-caracteres-sem-espacos' %}
+                    <div class="row text-center">
+                        <div class="col-6 mb-3">
+                            <div class="display-5 fw-bold text-primary">{{ result.total }}</div>
+                            <small class="text-muted">Total de Caracteres</small>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="display-5 fw-bold text-success">{{ result.no_spaces }}</div>
+                            <small class="text-muted">Sem Espaços</small>
+                        </div>
+                    </div>
+                    
+                    {% elif tool.slug == 'contador-vogais-consoantes' %}
+                    <div class="row text-center">
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="display-6 fw-bold text-primary">{{ result.vowels }}</div>
+                            <small class="text-muted">Vogais</small>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="display-6 fw-bold text-success">{{ result.consonants }}</div>
+                            <small class="text-muted">Consoantes</small>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="display-6 fw-bold text-info">{{ result.numbers }}</div>
+                            <small class="text-muted">Números</small>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="display-6 fw-bold text-warning">{{ result.symbols }}</div>
+                            <small class="text-muted">Símbolos</small>
+                        </div>
+                    </div>
+                    
+                    {% else %}
+                    <div class="position-relative">
+                        <textarea class="form-control" id="result-text" rows="6" readonly>{{ result }}</textarea>
+                        <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2" onclick="copyResult()">
+                            📋 Copiar
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Ad Space After Result -->
+                <div id="div-gpt-ad-after-result" class="ad-banner text-center bg-light border rounded p-3 my-4">
+                    <!-- Google AdSense - Substitua pelo seu código -->
+                    <small class="text-muted">Espaço para Anúncio (Após Resultado - Responsivo)</small>
+                </div>
+                {% endif %}
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-3">
+                    <button class="btn btn-outline-primary btn-sm" id="btn-copy-result" style="display: none;">
+                        📋 Copiar Resultado
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <article class="bg-light p-4 rounded mb-4">
+            <h2 class="h4 mb-3">Como usar {{ tool.name }}</h2>
+            <p class="small text-muted">
+                Esta ferramenta online gratuita foi desenvolvida para facilitar sua vida. 
+                {{ tool.description }} Basta digitar ou colar seu conteúdo e clicar no botão de ação.
+                O resultado aparece instantaneamente, sem necessidade de cadastro ou instalação.
+            </p>
+            <h3 class="h6 mt-3 mb-2">Palavras-chave relacionadas:</h3>
+            <div class="d-flex flex-wrap gap-2">
+                {% for keyword in tool.keywords %}
+                <span class="badge bg-secondary">{{ keyword }}</span>
+                {% endfor %}
+            </div>
+        </article>
+
+        <!-- Related Tools -->
+        <div class="card mb-4">
+            <div class="card-header bg-white">
+                <h3 class="h6 mb-0">🔗 Ferramentas Relacionadas</h3>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    {% for related_slug in related_tools[:3] %}
+                    {% set related = tools_dict.get(related_slug) %}
+                    {% if related and related.slug != tool.slug %}
+                    <div class="col-md-4">
+                        <a href="/{{ related.slug }}" class="text-decoration-none">
+                            <div class="p-2 border rounded hover-shadow bg-white h-100">
+                                <span class="fs-5">{{ related.icon }}</span>
+                                <div class="small fw-bold">{{ related.name }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+        <!-- Sidebar Ad Space -->
+        <div id="div-gpt-ad-sidebar-top" class="ad-banner text-center bg-light border rounded p-3 mb-4">
+            <!-- Google AdSense Sidebar - Substitua pelo seu código -->
+            <small class="text-muted">Espaço para Anúncio (Sidebar Topo - 300x250)</small>
+        </div>
+
+        <!-- All Tools List -->
+        <div class="card mb-4">
+            <div class="card-header bg-white">
+                <h3 class="h6 mb-0">📚 Todas as Ferramentas</h3>
+            </div>
+            <div class="list-group list-group-flush">
+                {% for slug, t in tools_dict.items() %}
+                <a href="/{{ slug }}" class="list-group-item list-group-item-action {% if slug == tool.slug %}active{% endif %}">
+                    <small>{{ t.icon }} {{ t.name }}</small>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Sidebar Ad Space Bottom -->
+        <div id="div-gpt-ad-sidebar-bottom" class="ad-banner text-center bg-light border rounded p-3">
+            <!-- Google AdSense Sidebar - Substitua pelo seu código -->
+            <small class="text-muted">Espaço para Anúncio (Sidebar Baixo - 300x600)</small>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "{{ tool.name }}",
+    "applicationCategory": "Productivity",
+    "operatingSystem": "Web Browser",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "BRL"
+    },
+    "description": "{{ tool.description }}",
+    "keywords": "{{ tool.keywords | join(', ') }}"
+}
+</script>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Clear button functionality
+document.getElementById('btn-clear').addEventListener('click', function() {
+    const inputs = document.querySelectorAll('#tool-form input[type="text"], #tool-form textarea');
+    inputs.forEach(input => input.value = '');
+    if (document.getElementById('min-val')) document.getElementById('min-val').value = '1';
+    if (document.getElementById('max-val')) document.getElementById('max-val').value = '100';
+});
+
+// Copy result function
+function copyResult() {
+    const resultText = document.getElementById('result-text');
+    if (resultText) {
+        resultText.select();
+        document.execCommand('copy');
+        alert('Resultado copiado!');
+    }
+}
+
+// Show copy button if there's a result
+if (document.getElementById('result-text')) {
+    document.getElementById('btn-copy-result').style.display = 'inline-block';
+    document.getElementById('btn-copy-result').addEventListener('click', copyResult);
+}
+</script>
+{% endblock %}
