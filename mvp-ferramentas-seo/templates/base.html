@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ferramentas Online Grátis | MVP SEO{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Coleção de 15 ferramentas online gratuitas para texto, números e utilidades. Rápido, simples e sem cadastro.{% endblock %}">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}Ferramentas Online Grátis{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Ferramentas úteis para trabalho remoto, estudantes e criadores de conteúdo.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- JSON-LD Schema -->
+    {% block schema %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "MVP Ferramentas SEO",
+        "url": "{{ request.host_url }}",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ request.host_url }}search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    {% endblock %}
+</head>
+<body>
+    <!-- Header Ad Space -->
+    <div class="container my-3">
+        <div id="div-gpt-ad-header" class="ad-banner text-center bg-light border rounded p-3">
+            <!-- Google AdSense Header - Substitua pelo seu código -->
+            <!-- Exemplo: 
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxx" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxxxxxxxxx" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            -->
+            <small class="text-muted">Espaço para Anúncio (Header - 728x90 ou Responsivo)</small>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">🛠️ MVP Ferramentas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ferramentas">Ferramentas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mb-5">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer Ad Space -->
+    <div class="container mb-4">
+        <div id="div-gpt-ad-footer" class="ad-banner text-center bg-light border rounded p-3">
+            <!-- Google AdSense Footer - Substitua pelo seu código -->
+            <small class="text-muted">Espaço para Anúncio (Footer - 728x90 ou Responsivo)</small>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>MVP Ferramentas SEO</h5>
+                    <p class="small">Ferramentas online gratuitas para otimizar seu trabalho diário. Sem cadastro, sem custos.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6>Ferramentas Populares</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="/contador-de-palavras" class="text-light text-decoration-none">Contador de Palavras</a></li>
+                        <li><a href="/remover-acentos" class="text-light text-decoration-none">Removedor de Acentos</a></li>
+                        <li><a href="/gerador-qr-code" class="text-light text-decoration-none">Gerador QR Code</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Links Úteis</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="/sitemap.xml" class="text-light text-decoration-none">Sitemap</a></li>
+                        <li><a href="/robots.txt" class="text-light text-decoration-none">Robots.txt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-3">
+            <p class="text-center small mb-0">&copy; 2026 MVP Ferramentas. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

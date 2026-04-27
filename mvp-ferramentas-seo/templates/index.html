@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}15 Ferramentas Online Grátis para Texto e Utilidades | MVP SEO{% endblock %}
+
+{% block meta_description %}Coleção completa de 15 ferramentas online gratuitas: contador de palavras, removedor de acentos, gerador de QR code e muito mais. Sem cadastro, uso ilimitado.{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 text-center">
+        <h1 class="display-5 fw-bold mb-3">🛠️ Ferramentas Online Grátis</h1>
+        <p class="lead text-muted">15 utilitários rápidos para trabalho remoto, estudantes e criadores de conteúdo</p>
+    </div>
+</div>
+
+<!-- Header Ad Space -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div id="div-gpt-ad-between-tools-top" class="ad-banner text-center bg-light border rounded p-3">
+            <!-- Google AdSense - Substitua pelo seu código -->
+            <small class="text-muted">Espaço para Anúncio (Topo da Página - Responsivo)</small>
+        </div>
+    </div>
+</div>
+
+<!-- Tools Grid -->
+<div class="row g-4" id="ferramentas">
+    {% for i, tool in enumerate(tools_list) %}
+    {% if i > 0 and i % 3 == 0 %}
+    <!-- Ad Space After Every 3 Tools -->
+    <div class="col-12 my-3">
+        <div id="div-gpt-ad-between-tools-{{ i // 3 }}" class="ad-banner text-center bg-light border rounded p-3">
+            <!-- Google AdSense - Substitua pelo seu código -->
+            <small class="text-muted">Espaço para Anúncio (Entre Ferramentas - Responsivo)</small>
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm hover-shadow">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="fs-1 me-3">{{ tool.icon }}</span>
+                    <h3 class="h5 card-title mb-0">{{ tool.name }}</h3>
+                </div>
+                <p class="card-text text-muted small">{{ tool.description }}</p>
+                <a href="/{{ tool.slug }}" class="btn btn-primary btn-sm w-100">Usar Ferramenta →</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Bottom Ad Space -->
+<div class="row mt-5 mb-4">
+    <div class="col-12">
+        <div id="div-gpt-ad-bottom-content" class="ad-banner text-center bg-light border rounded p-3">
+            <!-- Google AdSense - Substitua pelo seu código -->
+            <small class="text-muted">Espaço para Anúncio (Final do Conteúdo - Responsivo)</small>
+        </div>
+    </div>
+</div>
+
+<!-- SEO Content Footer -->
+<div class="row mt-5">
+    <div class="col-12">
+        <article class="bg-light p-4 rounded">
+            <h2 class="h4 mb-3">Ferramentas Gratuitas para Otimizar seu Trabalho</h2>
+            <p class="small text-muted">
+                Nosso conjunto de 15 ferramentas online foi desenvolvido para ajudar profissionais remotos, estudantes e criadores de conteúdo 
+                a realizar tarefas comuns de forma rápida e gratuita. Desde contagem de palavras até geração de QR Codes, todas as nossas 
+                utilidades funcionam diretamente no navegador, sem necessidade de cadastro ou instalação de software.
+            </p>
+            <p class="small text-muted">
+                As ferramentas são otimizadas para SEO e perfeitas para quem trabalha com marketing digital, redação de conteúdos, 
+                organização de dados e produtividade. Use quantas vezes quiser, completamente grátis!
+            </p>
+        </article>
+    </div>
+</div>
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "MVP Ferramentas SEO",
+    "applicationCategory": "Productivity",
+    "operatingSystem": "Web Browser",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "BRL"
+    },
+    "featureList": "{{ tools_list | map(attribute='name') | join(', ') }}"
+}
+</script>
+{% endblock %}
