@@ -1,224 +1,55 @@
+```
 # Dependencies
 node_modules/
-vendor/
+backend/node_modules/
+frontend/node_modules/
 
-# Build artifacts
-dist/
-build/
-target/
-release/
-debug/
+# Build outputs
+backend/dist/
+backend/build/
+frontend/dist/
+frontend/build/
 
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-.ENV
-.python-version
-*.so
-.Python
-*.pyc
-*.pyo
-*.pyd
-*.py.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo.class
-*.pyd.class
-*.pyc.class
-*.pyo......
-# Dependencies
-node_modules/
-vendor/
-
-# Build artifacts
-dist/
-build/
-target/
-release/
-debug/
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-.ENV
-.python-version
-*.so
-
-# Logs and temporary files
-*.log
-*.tmp
-*.temp
-*.swp
-*.swo
+# TypeScript cache
+*.tsbuildinfo
+**/.tsbuildinfo
 
 # Environment variables
 .env
 .env.local
 .env.*
+!.env.example
 
-# IDE and editor files
+# IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
+*.tmp
 
-# OS generated files
+# Logs
+*.log
+
+# OS files
 .DS_Store
 Thumbs.db
 
-# Coverage reports
+# Coverage
 coverage/
 htmlcov/
 .coverage
 
-# Compiled files
-*.o
-*.obj
-*.exe
-*.dll
-*.so
-*.a
-*.out
-
-# Compressed files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
-
-# Cache directories
-.mypy_cache/
+# Python (in case backend uses Python for anything)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
 .pytest_cache/
-.gradle/
-.julia/
-zig-cache/
-zig-out/
+.mypy_cache/
+```
