@@ -1,0 +1,16 @@
+.wsmvp-simulator { max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; }
+.wsmvp-progress-bar { height: 8px; background: #eee; border-radius: 4px; margin-bottom: 20px; }
+.wsmvp-progress { height: 100%; background: #4361ee; border-radius: 4px; transition: width 0.3s; }
+.wsmvp-step { display: none; }
+.wsmvp-step.active { display: block; }
+.wsmvp-question { margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 4px; }
+.wsmvp-question h3 { margin: 0 0 10px 0; }
+.wsmvp-question input[type=text], .wsmvp-question input[type=email], .wsmvp-question textarea, .wsmvp-question select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+.wsmvp-question textarea { min-height: 100px; }
+.wsmvp-question label { display: block; margin: 5px 0; cursor: pointer; }
+.wsmvp-navigation { margin-top: 20px; display: flex; gap: 10px; }
+.wsmvp-navigation button { padding: 10px 20px; border: none; background: #4361ee; color: white; border-radius: 4px; cursor: pointer; }
+.wsmvp-navigation button:hover { background: #3f37c9; }
+.wsmvp-preview-container { margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 4px; }
+.wsmvp-result { margin-top: 30px; padding: 20px; background: #e8f5e9; border-radius: 4px; }
+.required { color: red; }
